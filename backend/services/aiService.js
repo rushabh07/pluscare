@@ -7,7 +7,7 @@ import Appointment from "../models/appointmentModel.js";
 const getOpenAIClient = () => {
     const apiKey = process.env.NVIDIA_API_KEY;
     const baseURL = "https://integrate.api.nvidia.com/v1";
-    const defaultModel = "meta/llama-3.1-8b-instruct";
+    const defaultModel = "meta/llama-3.2-11b-vision-instruct";
 
     const client = apiKey
         ? new OpenAI({
@@ -40,7 +40,7 @@ export const nvidiaChat = async (messages = []) => {
         throw new Error("NVIDIA_API_KEY is not configured in .env");
     }
     const completion = await nvidiaClient.chat.completions.create({
-        model: "openai/gpt-oss-120b",
+        model: "meta/llama-3.2-11b-vision-instruct",
         messages: messages,
         temperature: 1,
         top_p: 1,
