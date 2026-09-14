@@ -3,7 +3,7 @@ import Service from "../models/serviceModel.js";
 import User from "../models/userModel.js";
 import Provider from "../models/providerModel.js";
 import Notification from "../models/notificationModel.js";
-import { sendBookingReceipt, sendBookingCancellation } from "../services/emailService.js";
+import { sendBookingReceipt, sendBookingCancellation, sendBookingStatusUpdateEmail } from "../services/emailService.js";
 
 // @desc    Create a new service booking
 // @route   POST /api/bookings
@@ -211,15 +211,30 @@ export const updateBookingStatus = async (req, res) => {
         booking.status = status;
         const updatedBooking = await booking.save();
 
+        const populatedBooking = await Booking.findById(updatedBooking._id)
+            .populate("service", "name category price duration")
+            .populate("provider", "fullName email phone specialization")
+            .populate("user", "fullName email phone");
+
         // Create Notification for User
         await Notification.create({
             user: booking.user,
             title: `Booking Update: ${status}`,
-            message: `Your booking for ${booking.service?.name} has been updated to "${status}".`,
+            message: `Your booking for ${populatedBooking?.service?.name || "Service"} has been updated to "${status}".`,
             type: "STATUS_UPDATE",
         });
 
-        res.json(updatedBooking);
+        // Send Email Notification to User (non-blocking)
+        if (populatedBooking && populatedBooking.user?.email) {
+            sendBookingStatusUpdateEmail(
+                populatedBooking,
+                populatedBooking.user.email,
+                populatedBooking.user.fullName,
+                status
+            ).catch((err) => console.error("Booking status email error:", err.message));
+        }
+
+        res.json(populatedBooking);
     } catch (error) {
         console.error("Error updating booking status:", error);
         res.status(500).json({ message: "Failed to update booking status" });

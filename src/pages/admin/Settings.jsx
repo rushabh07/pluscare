@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiUser, FiMail, FiPhone, FiLock, FiSave, FiShield } from "react-icons/fi";
-import api from "../../services/api";
+import api, { authService } from "../../services/api";
 
 export default function Settings() {
   const [profile, setProfile] = useState({ fullName: "", email: "", phone: "", gender: "Male" });
@@ -28,10 +28,11 @@ export default function Settings() {
     e.preventDefault();
     setProfileMsg({ text: "", error: false });
     try {
-      await api.put("/admin/profile", profile);
+      const res = await authService.updateProfile(profile);
+      const updatedUser = res.data;
       // Update localStorage
       const stored = JSON.parse(localStorage.getItem("userInfo") || "{}");
-      localStorage.setItem("userInfo", JSON.stringify({ ...stored, fullName: profile.fullName, email: profile.email }));
+      localStorage.setItem("userInfo", JSON.stringify({ ...stored, ...updatedUser }));
       setProfileMsg({ text: "Profile updated successfully.", error: false });
     } catch (err) {
       setProfileMsg({ text: err.response?.data?.message || "Update failed.", error: true });
@@ -46,7 +47,7 @@ export default function Settings() {
       return;
     }
     try {
-      await api.put("/admin/change-password", {
+      await authService.updateProfile({
         currentPassword: passwords.current,
         newPassword: passwords.newPass,
       });

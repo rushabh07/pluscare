@@ -1,8 +1,9 @@
 import axios from "axios";
 
 // Base API URL for backend Express server
-const API_BASE_URL = "https://pluscare-q7cx.onrender.com/api";
-// const API_BASE_URL = "http://localhost:5000/api";
+// const API_BASE_URL = "https://pluscare-q7cx.onrender.com/api";
+// const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+const API_BASE_URL = "http://localhost:5000/api";
 
 // Create Axios Instance
 const api = axios.create({
@@ -37,8 +38,10 @@ api.interceptors.request.use(
 export const authService = {
     register: (userData) => api.post("/users/register", userData),
     login: (credentials) => api.post("/users/login", credentials),
-    forgotPassword: (emailData) => api.post("/patient/forgot-password", emailData),
+    sendForgotPasswordOtp: (emailData) => api.post("/users/forgot-password/send-otp", emailData),
+    verifyForgotPasswordOtp: (resetData) => api.post("/users/forgot-password/verify-otp", resetData),
     getProfile: () => api.get("/users/profile"),
+    updateProfile: (userData) => api.put("/users/profile", userData),
     getDoctors: () => api.get("/users/doctors"),
 };
 

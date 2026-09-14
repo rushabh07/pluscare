@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {
   FiCalendar, FiFileText, FiLogOut, FiActivity,
-  FiHome, FiPlus, FiRefreshCw, FiAlertCircle, FiStar, FiX, FiCheckCircle
+  FiHome, FiPlus, FiRefreshCw, FiAlertCircle, FiStar, FiX, FiCheckCircle, FiUser
 } from "react-icons/fi";
 import api, { appointmentService, doctorService, serviceBookingApi, reviewApi } from "../../services/api";
+import ProfileModal from "../../components/ProfileModal";
 
 const STATUS_COLORS = {
   Pending: "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30",
@@ -321,8 +322,9 @@ export default function PatientDashboard() {
   const [error, setError] = useState("");
   const [showBooking, setShowBooking] = useState(false);
   const [reviewBooking, setReviewBooking] = useState(null);
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("userInfo") || "{}");
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("userInfo") || "{}"));
 
   const fetchData = () => {
     if (!user.token) {
@@ -390,14 +392,20 @@ export default function PatientDashboard() {
               Browse Services Directory
             </Link>
             <button
+              onClick={() => setShowProfileModal(true)}
+              className="flex items-center gap-2 text-xs bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-xl transition-colors font-bold shadow-lg cursor-pointer"
+            >
+              <FiUser /> Edit Profile
+            </button>
+            <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
             >
               <FiHome /> Home
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors"
+              className="flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors cursor-pointer"
             >
               <FiLogOut /> Logout
             </button>
@@ -660,6 +668,15 @@ export default function PatientDashboard() {
           }}
         />
       )}
+
+      {/* Profile Modal */}
+      <ProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        onProfileUpdated={(updatedUser) => {
+          setUser(prev => ({ ...prev, ...updatedUser }));
+        }}
+      />
     </div>
   );
 }
