@@ -1,9 +1,7 @@
 import axios from "axios";
 
 // Base API URL for backend Express server
-// const API_BASE_URL = "https://pluscare-q7cx.onrender.com/api";
-// const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = process.env.REACT_BACKEND_URL;
 
 // Create Axios Instance
 const api = axios.create({
