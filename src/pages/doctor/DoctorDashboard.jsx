@@ -26,6 +26,7 @@ import {
 } from "react-icons/fi";
 import api, { appointmentService, serviceBookingApi } from "../../services/api";
 import DoctorMedicalRecords from "./DoctorMedicalRecords";
+import ProfileModal from "../../components/ProfileModal";
 
 export default function DoctorDashboard() {
   const navigate = useNavigate();
@@ -62,7 +63,8 @@ export default function DoctorDashboard() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   
   // Doctor info
-  const user = JSON.parse(localStorage.getItem("userInfo") || "{}");
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("userInfo") || "{}"));
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
   const fetchData = async () => {
     if (!user.token) {
@@ -243,13 +245,21 @@ export default function DoctorDashboard() {
             {/* Light / Dark Mode Toggle Button */}
             <button
               onClick={toggleTheme}
-              className={`p-2.5 rounded-xl border transition-colors flex items-center justify-center text-sm ${
+              className={`p-2.5 rounded-xl border transition-colors flex items-center justify-center text-sm cursor-pointer ${
                 isDarkMode
                   ? "bg-gray-800 border-gray-700 text-amber-400 hover:bg-gray-700"
                   : "bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200"
               }`}
             >
               {isDarkMode ? <FiSun className="text-amber-400 text-lg" /> : <FiMoon className="text-indigo-600 text-lg" />}
+            </button>
+
+            {/* Edit Profile Button */}
+            <button
+              onClick={() => setShowProfileModal(true)}
+              className="px-3.5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white rounded-xl flex items-center gap-2 text-xs font-bold transition-all shadow-md cursor-pointer"
+            >
+              <FiUser /> Edit Profile
             </button>
 
             {/* Logout Button */}
@@ -478,6 +488,14 @@ export default function DoctorDashboard() {
           <DoctorMedicalRecords isDarkMode={isDarkMode} cardBg={cardBg} textSub={textSub} />
         )}
       </div>
+
+      <ProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        onProfileUpdated={(updatedUser) => {
+          setUser(prev => ({ ...prev, ...updatedUser }));
+        }}
+      />
     </div>
   );
 }

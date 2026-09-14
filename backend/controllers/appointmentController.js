@@ -1,4 +1,5 @@
 import Appointment from "../models/appointmentModel.js";
+import { sendAppointmentEmail } from "../services/emailService.js";
 
 /**
  * @desc    Create new appointment
@@ -28,6 +29,16 @@ export const createAppointment = async (req, res) => {
         const populatedAppointment = await Appointment.findById(createdAppointment._id)
             .populate("patient", "fullName email phone")
             .populate("doctor", "fullName specialization department");
+
+        // Send Email Notification (non-blocking)
+        if (populatedAppointment && populatedAppointment.patient?.email) {
+            sendAppointmentEmail(
+                populatedAppointment,
+                populatedAppointment.patient.email,
+                populatedAppointment.patient.fullName,
+                "booked"
+            ).catch((err) => console.error("Appointment email error:", err.message));
+        }
 
         res.status(201).json(populatedAppointment);
     } catch (error) {
@@ -152,6 +163,16 @@ export const updateAppointmentStatus = async (req, res) => {
         const populatedAppointment = await Appointment.findById(updatedAppointment._id)
             .populate("patient", "fullName email phone gender dob")
             .populate("doctor", "fullName specialization department");
+
+        // Send Email Notification on status update (non-blocking)
+        if (populatedAppointment && populatedAppointment.patient?.email && status) {
+            sendAppointmentEmail(
+                populatedAppointment,
+                populatedAppointment.patient.email,
+                populatedAppointment.patient.fullName,
+                status
+            ).catch((err) => console.error("Appointment status email error:", err.message));
+        }
 
         res.json(populatedAppointment);
     } catch (error) {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { FaHeartbeat, FaLock, FaUserPlus } from 'react-icons/fa';
+import { FaHeartbeat, FaLock, FaUserPlus, FaUserEdit } from 'react-icons/fa';
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import ProfileModal from './ProfileModal';
 
 const links = [
   { label: 'Home', id: 'hero' },
@@ -16,6 +17,7 @@ export default function Navbar({ onBook }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -109,6 +111,12 @@ export default function Navbar({ onBook }) {
                 className="flex items-center gap-1.5 text-gray-500 hover:text-blue-600 font-bold text-sm transition-colors">
                 Dashboard
               </Link>
+              <button
+                onClick={() => setShowProfileModal(true)}
+                className="px-3.5 py-2 border border-slate-300 rounded-xl text-slate-700 font-bold text-sm hover:bg-slate-50 transition-all flex items-center gap-1.5 cursor-pointer"
+              >
+                <FaUserEdit className="text-blue-600" /> Profile
+              </button>
               <button onClick={() => { localStorage.removeItem('userInfo'); setUser(null); }}
                 className="px-4 py-2 border border-red-300 rounded-xl text-red-600 font-bold text-sm hover:bg-red-50 transition-all flex items-center gap-1.5 cursor-pointer">
                 Logout
@@ -176,6 +184,12 @@ export default function Navbar({ onBook }) {
                   className="w-full text-center py-2.5 border border-slate-200 rounded-xl text-slate-700 font-bold text-sm cursor-pointer hover:bg-slate-50">
                   Dashboard
                 </Link>
+                <button
+                  onClick={() => { setShowProfileModal(true); setOpen(false); }}
+                  className="w-full py-2.5 border border-slate-300 rounded-xl text-slate-700 font-bold text-sm cursor-pointer hover:bg-slate-50 flex items-center justify-center gap-1.5"
+                >
+                  <FaUserEdit className="text-blue-600" /> Edit Profile
+                </button>
                 <button onClick={() => { localStorage.removeItem('userInfo'); setUser(null); setOpen(false); }}
                   className="w-full py-2.5 border border-red-300 rounded-xl text-red-600 font-bold text-sm cursor-pointer hover:bg-red-50">
                   Logout
@@ -191,6 +205,14 @@ export default function Navbar({ onBook }) {
           </div>
         </div>
       )}
+
+      <ProfileModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        onProfileUpdated={(updatedUser) => {
+          setUser(prev => ({ ...prev, ...updatedUser }));
+        }}
+      />
     </header>
   );
 }
