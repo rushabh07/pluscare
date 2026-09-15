@@ -96,17 +96,22 @@ export const createBooking = async (req, res) => {
             .populate("provider", "fullName email phone specialization")
             .populate("user", "fullName email phone");
 
-        // Send Email Receipt
-        const emailSent = await sendBookingReceipt(
+        // ✅ Return the booking response IMMEDIATELY — do not wait for email.
+        // Email is dispatched asynchronously so a slow/blocked SMTP server
+        // (e.g. Render blocking outbound port 465/587) never hangs the checkout.
+        res.status(201).json({
+            ...populatedBooking.toObject(),
+            emailDeliveryStatus: "Pending",
+        });
+
+        // Send Email Receipt in the background (fire-and-forget)
+        sendBookingReceipt(
             populatedBooking,
             req.user.email,
             req.user.fullName
+        ).catch((err) =>
+            console.error("Booking receipt email error (non-blocking):", err.message)
         );
-
-        res.status(201).json({
-            ...populatedBooking.toObject(),
-            emailDeliveryStatus: emailSent ? "Success" : "Failed",
-        });
     } catch (error) {
         console.error("Error creating booking:", error);
         res.status(500).json({ message: "Failed to create booking", error: error.message });
@@ -275,10 +280,17 @@ export const cancelBooking = async (req, res) => {
             type: "CANCELLED",
         });
 
-        // Send Cancellation Email
-        await sendBookingCancellation(updatedBooking, req.user.email, req.user.fullName);
-
+        // ✅ Return response IMMEDIATELY — do not wait for email.
         res.json(updatedBooking);
+
+        // Send Cancellation Email in the background (fire-and-forget)
+        sendBookingCancellation(
+            updatedBooking,
+            req.user.email,
+            req.user.fullName
+        ).catch((err) =>
+            console.error("Cancellation email error (non-blocking):", err.message)
+        );
     } catch (error) {
         console.error("Error cancelling booking:", error);
         res.status(500).json({ message: "Failed to cancel booking" });
