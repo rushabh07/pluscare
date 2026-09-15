@@ -1,7 +1,10 @@
 import axios from "axios";
 
-// Base API URL for backend Express server
-const API_BASE_URL = process.env.REACT_BACKEND_URL;
+// Base API URL for backend Express server.
+// In production (Vercel): set VITE_API_URL=https://pluscare-q7cx.onrender.com/api
+// In local dev: falls back to localhost:5000/api if VITE_API_URL is not set.
+const API_BASE_URL =
+    import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
 // Create Axios Instance
 const api = axios.create({
@@ -10,6 +13,7 @@ const api = axios.create({
         "Content-Type": "application/json",
     },
 });
+
 
 // Request Interceptor: Attach JWT Token if available in localStorage
 api.interceptors.request.use(

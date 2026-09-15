@@ -23,6 +23,12 @@ const transporter = nodemailer.createTransport({
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASSWORD,
     },
+    // Prevent indefinite hangs on Render where outbound SMTP may be restricted.
+    // If the TCP connection is not established within 10 s, Nodemailer throws
+    // immediately so the calling controller is not blocked.
+    connectionTimeout: 10000,  // 10 s — time to establish the TCP connection
+    greetingTimeout: 10000,    // 10 s — time to receive the SMTP greeting after connect
+    socketTimeout: 15000,      // 15 s — idle socket timeout during data transfer
 });
 
 // ═══════════════════════════════════════════════════════════════
