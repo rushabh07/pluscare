@@ -1,10 +1,13 @@
 import axios from "axios";
 
 // Base API URL for backend Express server.
-// In production (Vercel): set VITE_API_URL=https://pluscare-q7cx.onrender.com/api
-// In local dev: falls back to localhost:5000/api if VITE_API_URL is not set.
-const API_BASE_URL =
-    import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// VITE_API_URL must be set in Vercel Dashboard → Settings → Environment Variables
+// for the production build. Vite bakes this value at build time.
+//
+// Local dev: add VITE_API_URL=http://localhost:5000/api to the root .env file
+//            (it is currently set to the Render URL — change it locally as needed)
+const API_BASE_URL = import.meta.env.VITE_API_URL;
+
 
 // Create Axios Instance
 const api = axios.create({
