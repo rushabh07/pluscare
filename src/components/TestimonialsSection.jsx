@@ -18,7 +18,7 @@ export default function TestimonialsSection() {
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-40 pointer-events-none" />
       <div className="max-w-4xl mx-auto px-5 text-center relative">
-        <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Patient Stories</span>
+        <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Patient Stories</span>
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-14">Real Outcomes from Real Patients</h2>
 
         <div className="relative min-h-[220px] flex items-center justify-center">
@@ -29,23 +29,32 @@ export default function TestimonialsSection() {
               <div className="flex gap-1 justify-center mb-4">
                 {Array.from({ length: t.rating }).map((_, j) => <FaStar key={j} className="text-amber-400 text-sm" />)}
               </div>
-              <h4 className="font-bold text-slate-900">{t.author}</h4>
+              <p className="font-bold text-slate-900">{t.author}</p>
               <p className="text-xs text-slate-400 font-semibold">{t.role} — {t.location}</p>
             </div>
           ))}
         </div>
 
         <div className="flex items-center justify-center gap-12 mt-16">
-          <button onClick={prev} className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:border-blue-400 hover:text-blue-600 flex items-center justify-center transition-all cursor-pointer shadow-sm">
-            <FaChevronLeft className="text-xs" />
+          <button onClick={prev} aria-label="Previous testimonial" className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:border-blue-400 hover:text-blue-600 flex items-center justify-center transition-all cursor-pointer shadow-sm">
+            <FaChevronLeft className="text-xs" aria-hidden="true" />
           </button>
-          <div className="flex gap-2">
+          <div className="flex gap-1" role="tablist" aria-label="Testimonials">
             {testimonials.map((_, i) => (
-              <button key={i} onClick={() => setActive(i)} className={`h-2 rounded-full transition-all cursor-pointer ${i === active ? 'bg-blue-600 w-6' : 'bg-slate-200 w-2 hover:bg-slate-300'}`} />
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                role="tab"
+                aria-selected={i === active}
+                aria-label={`Go to testimonial ${i + 1} of ${n}`}
+                className="min-w-6 min-h-6 flex items-center justify-center cursor-pointer"
+              >
+                <span className={`h-2 rounded-full transition-all ${i === active ? 'bg-blue-600 w-6' : 'bg-slate-200 w-2 hover:bg-slate-300'}`} />
+              </button>
             ))}
           </div>
-          <button onClick={next} className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:border-blue-400 hover:text-blue-600 flex items-center justify-center transition-all cursor-pointer shadow-sm">
-            <FaChevronRight className="text-xs" />
+          <button onClick={next} aria-label="Next testimonial" className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:border-blue-400 hover:text-blue-600 flex items-center justify-center transition-all cursor-pointer shadow-sm">
+            <FaChevronRight className="text-xs" aria-hidden="true" />
           </button>
         </div>
       </div>

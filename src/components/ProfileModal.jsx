@@ -223,8 +223,8 @@ export default function ProfileModal({ isOpen, onClose, onProfileUpdated }) {
                         <div
                             className={`mb-5 p-3.5 rounded-2xl text-xs sm:text-sm font-medium flex items-center gap-2.5 ${
                                 message.type === "success"
-                                    ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                                    : "bg-red-50 text-red-700 border border-red-200"
+                                    ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                                    : "bg-red-50 text-red-800 border border-red-200"
                             }`}
                         >
                             {message.type === "success" ? (

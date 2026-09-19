@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate, Outlet } from "react-router-dom";
+import { NavLink, useNavigate, Outlet, Link } from "react-router-dom";
 import {
   FiGrid, FiUsers, FiUser, FiCalendar, FiLayers,
   FiDollarSign, FiFileText, FiBell, FiBarChart2,
   FiPieChart, FiSettings, FiLogOut, FiMenu, FiX,
   FiActivity, FiChevronRight
 } from "react-icons/fi";
+import ThemeToggle from "../components/ThemeToggle";
 
 const navItems = [
   { to: "/admin/dashboard",       label: "Dashboard",       icon: <FiGrid /> },
@@ -34,22 +35,22 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-950 text-white overflow-hidden">
-      {/* Sidebar */}
+    <div className="flex h-screen pc-page overflow-hidden">
+      {/* Sidebar — light brand theme, matches public site */}
       <aside
         className={`${
           sidebarOpen ? "w-64" : "w-20"
-        } flex-shrink-0 transition-all duration-300 flex flex-col bg-gray-900 border-r border-gray-800 shadow-2xl`}
+        } flex-shrink-0 transition-all duration-300 flex flex-col bg-white border-r border-slate-200 shadow-sm`}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 px-5 py-5 border-b border-gray-800">
-          <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center shadow-lg flex-shrink-0">
+        <div className="flex items-center gap-3 px-5 py-5 border-b border-slate-200">
+          <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-teal-500 rounded-xl flex items-center justify-center shadow-md flex-shrink-0">
             <FiActivity className="text-white text-lg" />
           </div>
           {sidebarOpen && (
             <div>
-              <span className="font-bold text-white text-lg leading-none">PlusCare</span>
-              <p className="text-xs text-blue-400 font-medium">Admin Panel</p>
+              <span className="font-extrabold text-slate-900 text-lg leading-none">Plus<span className="text-blue-600">Care</span></span>
+              <p className="text-xs text-blue-600 font-bold">Admin Panel</p>
             </div>
           )}
         </div>
@@ -61,10 +62,10 @@ export default function AdminLayout() {
               key={item.to}
               to={item.to}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
+                `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 group ${
                   isActive
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-900/40"
-                    : "text-gray-400 hover:bg-gray-800 hover:text-white"
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`
               }
             >
@@ -80,21 +81,21 @@ export default function AdminLayout() {
         </nav>
 
         {/* User + Logout */}
-        <div className="border-t border-gray-800 p-3">
+        <div className="border-t border-slate-200 p-3">
           {sidebarOpen && (
             <div className="flex items-center gap-3 px-2 py-2 mb-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-sm font-bold">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-teal-500 rounded-full flex items-center justify-center text-sm font-bold text-white">
                 {user.fullName?.charAt(0) || "A"}
               </div>
               <div className="overflow-hidden">
-                <p className="text-sm font-semibold text-white truncate">{user.fullName || "Admin"}</p>
-                <p className="text-xs text-gray-500 truncate">{user.email || ""}</p>
+                <p className="text-sm font-bold text-slate-900 truncate">{user.fullName || "Admin"}</p>
+                <p className="text-xs text-slate-500 truncate">{user.email || ""}</p>
               </div>
             </div>
           )}
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-all duration-200"
+            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-red-600 hover:bg-red-50 transition-all duration-200"
           >
             <FiLogOut className="text-lg flex-shrink-0" />
             {sidebarOpen && <span>Logout</span>}
@@ -105,30 +106,38 @@ export default function AdminLayout() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Header */}
-        <header className="flex items-center gap-4 px-6 py-4 border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm">
+        <header className="flex items-center gap-4 px-6 py-4 border-b border-slate-200 bg-white/90 backdrop-blur-sm">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all"
+            className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all"
+            aria-label="Toggle sidebar"
           >
             {sidebarOpen ? <FiX className="text-lg" /> : <FiMenu className="text-lg" />}
           </button>
 
+          <Link to="/" className="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors">
+            ← View Website
+          </Link>
+
           <div className="flex-1" />
 
+          {/* Theme: Light / System / Dark */}
+          <ThemeToggle />
+
           {/* Notification Bell */}
-          <button className="relative p-2 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all">
+          <button className="relative p-2 rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all" aria-label="Notifications">
             <FiBell className="text-lg" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full" />
           </button>
 
           {/* Avatar */}
-          <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-sm font-bold shadow-lg">
+          <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-teal-500 rounded-full flex items-center justify-center text-sm font-bold text-white shadow-md">
             {user.fullName?.charAt(0) || "A"}
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-y-auto p-6 bg-gray-950">
+        <main className="flex-1 overflow-y-auto p-6 pc-page">
           <Outlet />
         </main>
       </div>

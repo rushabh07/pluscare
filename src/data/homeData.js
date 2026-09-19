@@ -50,8 +50,8 @@ export const blogPosts = [
 ];
 
 export const triageDB = {
-  chest:   { dept: 'Cardiology',       priority: 'High — Urgent',  color: 'text-red-600 bg-red-50 border-red-200',     advice: 'AI detected possible cardiac indicators. Routed to Cardiology. If pain is acute, call emergency services immediately.' },
-  head:    { dept: 'Neurology',        priority: 'Medium',          color: 'text-amber-600 bg-amber-50 border-amber-200', advice: 'Symptoms suggest tension headache or migraine pattern. Routing to Neurology team for assessment.' },
+  chest:   { dept: 'Cardiology',       priority: 'High — Urgent',  color: 'text-red-800 bg-red-50 border-red-200',     advice: 'AI detected possible cardiac indicators. Routed to Cardiology. If pain is acute, call emergency services immediately.' },
+  head:    { dept: 'Neurology',        priority: 'Medium',          color: 'text-amber-800 bg-amber-50 border-amber-200', advice: 'Symptoms suggest tension headache or migraine pattern. Routing to Neurology team for assessment.' },
   child:   { dept: 'Pediatrics',       priority: 'Routine',         color: 'text-green-600 bg-green-50 border-green-200', advice: 'Pediatric assessment recommended. Scheduling with Pediatric specialist.' },
-  default: { dept: 'General Medicine', priority: 'Routine',         color: 'text-blue-600 bg-blue-50 border-blue-200',   advice: 'Routing to Internal Medicine for a comprehensive initial evaluation.' },
+  default: { dept: 'General Medicine', priority: 'Routine',         color: 'text-blue-800 bg-blue-50 border-blue-200',   advice: 'Routing to Internal Medicine for a comprehensive initial evaluation.' },
 };

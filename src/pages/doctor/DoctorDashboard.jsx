@@ -15,8 +15,6 @@ import {
   FiAlertCircle,
   FiClock,
   FiX,
-  FiSun,
-  FiMoon,
   FiLayers,
   FiMapPin,
   FiPhone,
@@ -27,24 +25,15 @@ import {
 import api, { appointmentService, serviceBookingApi } from "../../services/api";
 import DoctorMedicalRecords from "./DoctorMedicalRecords";
 import ProfileModal from "../../components/ProfileModal";
+import ThemeToggle from "../../components/ThemeToggle";
+import { useTheme } from "../../theme/ThemeContext";
 
 export default function DoctorDashboard() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("serviceRequests"); // "serviceRequests" | "appointments" | "records"
   
-  // Theme state
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const saved = localStorage.getItem("doctorTheme");
-    return saved !== null ? JSON.parse(saved) : true;
-  });
-
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => {
-      const nextTheme = !prev;
-      localStorage.setItem("doctorTheme", JSON.stringify(nextTheme));
-      return nextTheme;
-    });
-  };
+  // Theme — global Light / System / Dark (default: System), shared with the whole site
+  const { isDark: isDarkMode } = useTheme();
 
   // Appointments & Service Bookings state
   const [appointments, setAppointments] = useState([]);
@@ -115,16 +104,28 @@ export default function DoctorDashboard() {
     navigate("/login");
   };
 
-  const STATUS_COLORS = {
-    Pending: "bg-amber-500/20 text-amber-400 border border-amber-500/30",
-    Accepted: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
-    "On The Way": "bg-purple-500/20 text-purple-400 border border-purple-500/30",
-    Started: "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30",
-    Completed: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
-    Cancelled: "bg-rose-500/20 text-rose-400 border border-rose-500/30",
-    Rejected: "bg-rose-500/20 text-rose-400 border border-rose-500/30",
-    Confirmed: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
+  // Status badges — theme-aware so text stays readable on both light & dark
+  const STATUS_COLORS_DARK = {
+    Pending: "bg-amber-500/20 text-amber-300 border border-amber-500/30",
+    Accepted: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
+    "On The Way": "bg-purple-500/20 text-purple-300 border border-purple-500/30",
+    Started: "bg-indigo-500/20 text-indigo-300 border border-indigo-500/30",
+    Completed: "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30",
+    Cancelled: "bg-rose-500/20 text-rose-300 border border-rose-500/30",
+    Rejected: "bg-rose-500/20 text-rose-300 border border-rose-500/30",
+    Confirmed: "bg-blue-500/20 text-blue-300 border border-blue-500/30",
   };
+  const STATUS_COLORS_LIGHT = {
+    Pending: "bg-amber-100 text-amber-800 border border-amber-300",
+    Accepted: "bg-blue-100 text-blue-800 border border-blue-300",
+    "On The Way": "bg-purple-100 text-purple-800 border border-purple-300",
+    Started: "bg-indigo-100 text-indigo-800 border border-indigo-300",
+    Completed: "bg-emerald-100 text-emerald-800 border border-emerald-300",
+    Cancelled: "bg-red-100 text-red-800 border border-red-300",
+    Rejected: "bg-red-100 text-red-800 border border-red-300",
+    Confirmed: "bg-blue-100 text-blue-800 border border-blue-300",
+  };
+  const STATUS_COLORS = isDarkMode ? STATUS_COLORS_DARK : STATUS_COLORS_LIGHT;
 
   // Service Booking Status Update Handler
   const handleUpdateServiceBookingStatus = async (id, newStatus) => {
@@ -242,17 +243,8 @@ export default function DoctorDashboard() {
               </button>
             </div>
 
-            {/* Light / Dark Mode Toggle Button */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2.5 rounded-xl border transition-colors flex items-center justify-center text-sm cursor-pointer ${
-                isDarkMode
-                  ? "bg-gray-800 border-gray-700 text-amber-400 hover:bg-gray-700"
-                  : "bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200"
-              }`}
-            >
-              {isDarkMode ? <FiSun className="text-amber-400 text-lg" /> : <FiMoon className="text-indigo-600 text-lg" />}
-            </button>
+            {/* Global Light / System / Dark theme switch */}
+            <ThemeToggle />
 
             {/* Edit Profile Button */}
             <button
@@ -274,13 +266,13 @@ export default function DoctorDashboard() {
 
         {/* Global Notifications */}
         {successMsg && (
-          <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl flex items-center gap-3 text-emerald-400 text-sm">
+          <div className={`p-4 rounded-xl flex items-center gap-3 text-sm border ${isDarkMode ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300" : "bg-emerald-50 border-emerald-200 text-emerald-800"}`}>
             <FiCheckCircle className="text-lg flex-shrink-0" />
             <span>{successMsg}</span>
           </div>
         )}
         {errorMsg && (
-          <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl flex items-center gap-3 text-rose-400 text-sm">
+          <div className={`p-4 rounded-xl flex items-center gap-3 text-sm border ${isDarkMode ? "bg-rose-500/10 border-rose-500/30 text-rose-300" : "bg-red-50 border-red-200 text-red-800"}`}>
             <FiAlertCircle className="text-lg flex-shrink-0" />
             <span>{errorMsg}</span>
           </div>
@@ -299,19 +291,19 @@ export default function DoctorDashboard() {
                 </div>
                 <button
                   onClick={fetchData}
-                  className="px-3 py-1.5 bg-gray-800 text-gray-300 hover:text-white rounded-lg text-xs font-semibold flex items-center gap-1.5"
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 border transition-colors ${isDarkMode ? "bg-gray-800 border-gray-700 text-gray-200 hover:text-white" : "bg-white border-slate-300 text-slate-700 hover:bg-slate-50"}`}
                 >
                   <FiRefreshCw className={loading ? "animate-spin" : ""} /> Refresh
                 </button>
               </div>
 
               {loading ? (
-                <div className="py-12 text-center text-sm text-gray-500 animate-pulse">
+                <div className={`py-12 text-center text-sm animate-pulse ${textSub}`}>
                   Loading service requests...
                 </div>
               ) : serviceBookings.length === 0 ? (
-                <div className="py-12 text-center text-gray-500 text-sm">
-                  <FiLayers className="text-4xl mx-auto mb-2 text-gray-600" />
+                <div className={`py-12 text-center text-sm ${textSub}`}>
+                  <FiLayers className={`text-4xl mx-auto mb-2 ${isDarkMode ? "text-gray-600" : "text-slate-300"}`} />
                   <p>No service requests assigned to your provider profile.</p>
                 </div>
               ) : (
@@ -325,7 +317,7 @@ export default function DoctorDashboard() {
                     >
                       <div className="flex justify-between items-start">
                         <div>
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-teal-400 bg-teal-500/10 px-2.5 py-0.5 rounded-full border border-teal-500/20">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-teal-800 bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">
                             {b.service?.category || "Service"}
                           </span>
                           <h3 className="font-bold text-base mt-1">{b.service?.name}</h3>
@@ -340,30 +332,30 @@ export default function DoctorDashboard() {
 
                       <div className={`text-xs space-y-1.5 pt-2 border-t ${isDarkMode ? "border-gray-800" : "border-slate-200"}`}>
                         <div className="flex items-center gap-2">
-                          <FiClock className="text-teal-400" />
+                          <FiClock className="text-teal-600" />
                           <span>
                             {new Date(b.bookingDate).toLocaleDateString()} @ <strong>{b.timeSlot}</strong>
                           </span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <FiMapPin className="text-teal-400" />
+                          <FiMapPin className="text-teal-600" />
                           <span>Address: {b.address}</span>
                         </div>
                         {b.user?.phone && (
                           <div className="flex items-center gap-2">
-                            <FiPhone className="text-teal-400" />
+                            <FiPhone className="text-teal-600" />
                             <span>Phone: {b.user.phone}</span>
                           </div>
                         )}
                         {b.notes && (
-                          <p className="text-amber-400 pt-1 italic">
+                          <p className="text-amber-600 pt-1 italic">
                             Notes: "{b.notes}"
                           </p>
                         )}
                       </div>
 
                       {/* Provider Action Buttons based on status */}
-                      <div className="pt-3 border-t border-gray-800 flex flex-wrap gap-2 justify-end">
+                      <div className={`pt-3 border-t flex flex-wrap gap-2 justify-end ${isDarkMode ? "border-gray-800" : "border-slate-200"}`}>
                         {b.status === "Pending" && (
                           <>
                             <button
@@ -414,7 +406,7 @@ export default function DoctorDashboard() {
                         )}
 
                         {b.status === "Completed" && (
-                          <span className="text-xs text-emerald-400 font-bold flex items-center gap-1">
+                          <span className={`text-xs font-bold flex items-center gap-1 ${isDarkMode ? "text-emerald-300" : "text-emerald-700"}`}>
                             ✓ Service Completed
                           </span>
                         )}
@@ -443,12 +435,12 @@ export default function DoctorDashboard() {
                       <th className="py-3 px-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-800">
+                  <tbody className={`divide-y ${isDarkMode ? "divide-gray-800" : "divide-slate-100"}`}>
                     {filteredAppointments.map((a) => (
                       <tr key={a._id} className={tableRowHover}>
                         <td className="py-3.5 px-4 font-semibold">{a.patient?.fullName || "Patient"}</td>
-                        <td className="py-3.5 px-4 text-gray-400">{a.department}</td>
-                        <td className="py-3.5 px-4 text-gray-400">
+                        <td className={`py-3.5 px-4 ${textSub}`}>{a.department}</td>
+                        <td className={`py-3.5 px-4 ${textSub}`}>
                           {new Date(a.appointmentDate).toLocaleDateString()} @ {a.timeSlot}
                         </td>
                         <td className="py-3.5 px-4">

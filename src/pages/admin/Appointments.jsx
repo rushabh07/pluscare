@@ -3,10 +3,10 @@ import { FiCalendar, FiSearch, FiEdit2, FiTrash2, FiX } from "react-icons/fi";
 import api from "../../services/api";
 
 const STATUS_COLORS = {
-  Pending:   "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30",
-  Confirmed: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
-  Completed: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
-  Cancelled: "bg-red-500/20 text-red-400 border border-red-500/30",
+  Pending:   "bg-amber-100 text-amber-800 border border-amber-300",
+  Confirmed: "bg-blue-100 text-blue-800 border border-blue-300",
+  Completed: "bg-emerald-100 text-emerald-800 border border-emerald-300",
+  Cancelled: "bg-red-100 text-red-800 border border-red-300",
 };
 
 export default function Appointments() {
@@ -65,12 +65,12 @@ export default function Appointments() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Appointments</h1>
-        <p className="text-gray-500 text-sm mt-1">{appointments.length} total appointments</p>
+        <h1 className="text-2xl font-extrabold text-slate-900">Appointments</h1>
+        <p className="text-slate-500 text-sm mt-1">{appointments.length} total appointments</p>
       </div>
 
       {(error || success) && (
-        <div className={`px-4 py-3 rounded-xl text-sm ${error ? "bg-red-500/10 text-red-400 border border-red-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"}`}>
+        <div className={`px-4 py-3 rounded-xl text-sm font-medium border ${error ? "bg-red-50 text-red-800 border-red-200" : "bg-emerald-50 text-emerald-800 border-emerald-200"}`}>
           {error || success}
         </div>
       )}
@@ -78,18 +78,18 @@ export default function Appointments() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+          <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search patient, doctor, department..."
-            className="w-full bg-gray-900 border border-gray-800 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-all"
+            className="w-full pc-input pl-11 pr-4 py-3 text-sm placeholder-slate-400 transition-all"
           />
         </div>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-blue-500 transition-all min-w-[140px]"
+          className="pc-input px-4 py-3 text-sm min-w-[140px] transition-all"
         >
           <option value="All">All Status</option>
           <option>Pending</option>
@@ -100,49 +100,49 @@ export default function Appointments() {
       </div>
 
       {/* Table */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+      <div className="pc-card overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-gray-500 text-sm animate-pulse">Loading appointments...</div>
+          <div className="p-8 text-center text-slate-500 text-sm animate-pulse">Loading appointments...</div>
         ) : filtered.length === 0 ? (
-          <div className="p-8 text-center text-gray-500 text-sm">No appointments found.</div>
+          <div className="p-8 text-center text-slate-500 text-sm">No appointments found.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-gray-800 bg-gray-800/50">
-                <tr className="text-gray-500 text-left">
-                  <th className="px-5 py-3 font-medium">Patient</th>
-                  <th className="px-5 py-3 font-medium">Doctor</th>
-                  <th className="px-5 py-3 font-medium">Department</th>
-                  <th className="px-5 py-3 font-medium">Date</th>
-                  <th className="px-5 py-3 font-medium">Time</th>
-                  <th className="px-5 py-3 font-medium">Status</th>
-                  <th className="px-5 py-3 font-medium">Actions</th>
+              <thead className="border-b border-slate-200 bg-slate-50">
+                <tr className="text-slate-500 text-left">
+                  <th className="px-5 py-3 font-semibold">Patient</th>
+                  <th className="px-5 py-3 font-semibold">Doctor</th>
+                  <th className="px-5 py-3 font-semibold">Department</th>
+                  <th className="px-5 py-3 font-semibold">Date</th>
+                  <th className="px-5 py-3 font-semibold">Time</th>
+                  <th className="px-5 py-3 font-semibold">Status</th>
+                  <th className="px-5 py-3 font-semibold">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-800">
+              <tbody className="divide-y divide-slate-100">
                 {filtered.map((appt) => (
-                  <tr key={appt._id} className="hover:bg-gray-800/40 transition-colors">
-                    <td className="px-5 py-3 text-white font-medium">{appt.patient?.fullName || "—"}</td>
-                    <td className="px-5 py-3 text-gray-400">{appt.doctor?.fullName || "—"}</td>
-                    <td className="px-5 py-3 text-gray-400">{appt.department}</td>
-                    <td className="px-5 py-3 text-gray-400">
+                  <tr key={appt._id} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-5 py-3 text-slate-900 font-semibold">{appt.patient?.fullName || "—"}</td>
+                    <td className="px-5 py-3 text-slate-600">{appt.doctor?.fullName || "—"}</td>
+                    <td className="px-5 py-3 text-slate-600">{appt.department}</td>
+                    <td className="px-5 py-3 text-slate-600">
                       {appt.appointmentDate ? new Date(appt.appointmentDate).toLocaleDateString() : "—"}
                     </td>
-                    <td className="px-5 py-3 text-gray-400">{appt.timeSlot}</td>
+                    <td className="px-5 py-3 text-slate-600">{appt.timeSlot}</td>
                     <td className="px-5 py-3">
                       <select
                         value={appt.status}
                         onChange={(e) => handleStatusChange(appt._id, e.target.value)}
-                        className={`text-xs font-medium rounded-lg px-2 py-1 border focus:outline-none cursor-pointer bg-transparent ${STATUS_COLORS[appt.status] || "bg-gray-700 text-gray-300 border-gray-600"}`}
+                        className={`text-xs font-bold rounded-lg px-2 py-1 border focus:outline-none cursor-pointer ${STATUS_COLORS[appt.status] || "bg-slate-100 text-slate-700 border-slate-300"}`}
                       >
-                        <option className="bg-gray-900" value="Pending">Pending</option>
-                        <option className="bg-gray-900" value="Confirmed">Confirmed</option>
-                        <option className="bg-gray-900" value="Completed">Completed</option>
-                        <option className="bg-gray-900" value="Cancelled">Cancelled</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Cancelled">Cancelled</option>
                       </select>
                     </td>
                     <td className="px-5 py-3">
-                      <button onClick={() => handleDelete(appt._id)} className="p-1.5 rounded-lg text-red-400 hover:bg-red-500/10 transition-all">
+                      <button onClick={() => handleDelete(appt._id)} className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-all" aria-label="Delete appointment">
                         <FiTrash2 />
                       </button>
                     </td>

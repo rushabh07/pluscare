@@ -216,7 +216,7 @@ export default function ServicesPage() {
             <p className="text-slate-500 text-sm font-medium">Querying MongoDB service records...</p>
           </div>
         ) : error ? (
-          <div className="p-8 bg-red-50 border border-red-200 rounded-3xl text-center text-red-600">
+          <div className="p-8 bg-red-50 border border-red-200 rounded-3xl text-center text-red-800">
             <FiAlertCircle className="text-4xl mx-auto mb-2 text-red-500" />
             <p className="font-bold">{error}</p>
           </div>

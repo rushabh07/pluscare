@@ -129,7 +129,7 @@ export default function BookingModal({ open, onClose, defaultDept = 'General Med
           {!success ? (
             <>
               <div className="text-center mb-7">
-                <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm">
+                <div className="w-14 h-14 bg-blue-50 text-blue-800 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm">
                   <FaRegCalendarCheck />
                 </div>
                 <h2 className="text-2xl font-extrabold text-slate-900 mb-1.5">Schedule a Consultation</h2>

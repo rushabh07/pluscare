@@ -63,86 +63,86 @@ export default function Settings() {
   return (
     <div className="space-y-6 max-w-2xl">
       <div>
-        <h1 className="text-2xl font-bold text-white">Settings</h1>
-        <p className="text-gray-500 text-sm mt-1">Manage your admin account preferences</p>
+        <h1 className="text-2xl font-extrabold text-slate-900">Settings</h1>
+        <p className="text-slate-500 text-sm mt-1">Manage your admin account preferences</p>
       </div>
 
       {/* Profile Card */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6">
         <div className="flex items-center gap-4 mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg">
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-teal-500 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-md">
             {user.fullName?.charAt(0) || "A"}
           </div>
           <div>
-            <h2 className="font-semibold text-white text-lg">{user.fullName || "Admin"}</h2>
+            <h2 className="font-semibold text-slate-900 text-lg">{user.fullName || "Admin"}</h2>
             <div className="flex items-center gap-1.5 mt-1">
-              <FiShield className="text-blue-400 text-xs" />
-              <span className="text-xs text-blue-400 font-medium">Administrator</span>
+              <FiShield className="text-blue-600 text-xs" />
+              <span className="text-xs text-blue-700 font-bold">Administrator</span>
             </div>
           </div>
         </div>
 
-        <h3 className="text-sm font-medium text-gray-400 mb-4 flex items-center gap-2">
+        <h3 className="text-sm font-medium text-slate-600 mb-4 flex items-center gap-2">
           <FiUser /> Profile Information
         </h3>
 
         {profileMsg.text && (
-          <div className={`px-4 py-3 rounded-xl text-sm mb-4 ${profileMsg.error ? "bg-red-500/10 text-red-400 border border-red-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"}`}>
+          <div className={`px-4 py-3 rounded-xl text-sm mb-4 ${profileMsg.error ? "bg-red-50 text-red-800 border border-red-200" : "bg-emerald-50 text-emerald-800 border border-emerald-200"}`}>
             {profileMsg.text}
           </div>
         )}
 
         {loading ? (
           <div className="space-y-3 animate-pulse">
-            {[...Array(4)].map((_, i) => <div key={i} className="h-10 bg-gray-800 rounded-xl" />)}
+            {[...Array(4)].map((_, i) => <div key={i} className="h-10 bg-slate-100 rounded-xl" />)}
           </div>
         ) : (
           <form onSubmit={handleProfileSave} className="space-y-4">
             <div>
-              <label className="block text-xs text-gray-500 mb-1.5">Full Name</label>
+              <label className="block text-xs text-slate-500 mb-1.5">Full Name</label>
               <div className="relative">
-                <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm" />
+                <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
                 <input
                   value={profile.fullName}
                   onChange={(e) => setProfile({ ...profile, fullName: e.target.value })}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-white border border-slate-300 rounded-xl pl-9 pr-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1.5">Email</label>
+              <label className="block text-xs text-slate-500 mb-1.5">Email</label>
               <div className="relative">
-                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm" />
+                <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
                 <input
                   type="email"
                   value={profile.email}
                   onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-white border border-slate-300 rounded-xl pl-9 pr-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1.5">Phone</label>
+              <label className="block text-xs text-slate-500 mb-1.5">Phone</label>
               <div className="relative">
-                <FiPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm" />
+                <FiPhone className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
                 <input
                   value={profile.phone}
                   onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-white border border-slate-300 rounded-xl pl-9 pr-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs text-gray-500 mb-1.5">Gender</label>
+              <label className="block text-xs text-slate-500 mb-1.5">Gender</label>
               <select
                 value={profile.gender}
                 onChange={(e) => setProfile({ ...profile, gender: e.target.value })}
-                className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
               >
                 <option>Male</option><option>Female</option><option>Other</option>
               </select>
             </div>
-            <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-blue-900/30">
+            <button type="submit" className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-blue-200">
               <FiSave /> Save Profile
             </button>
           </form>
@@ -150,13 +150,13 @@ export default function Settings() {
       </div>
 
       {/* Password Card */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
-        <h3 className="text-sm font-medium text-gray-400 mb-4 flex items-center gap-2">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6">
+        <h3 className="text-sm font-medium text-slate-600 mb-4 flex items-center gap-2">
           <FiLock /> Change Password
         </h3>
 
         {passMsg.text && (
-          <div className={`px-4 py-3 rounded-xl text-sm mb-4 ${passMsg.error ? "bg-red-500/10 text-red-400 border border-red-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"}`}>
+          <div className={`px-4 py-3 rounded-xl text-sm mb-4 ${passMsg.error ? "bg-red-50 text-red-800 border border-red-200" : "bg-emerald-50 text-emerald-800 border border-emerald-200"}`}>
             {passMsg.text}
           </div>
         )}
@@ -168,20 +168,20 @@ export default function Settings() {
             { key: "confirm", label: "Confirm New Password" },
           ].map((f) => (
             <div key={f.key}>
-              <label className="block text-xs text-gray-500 mb-1.5">{f.label}</label>
+              <label className="block text-xs text-slate-500 mb-1.5">{f.label}</label>
               <div className="relative">
-                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm" />
+                <FiLock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm" />
                 <input
                   type="password"
                   required
                   value={passwords[f.key]}
                   onChange={(e) => setPasswords({ ...passwords, [f.key]: e.target.value })}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full bg-white border border-slate-300 rounded-xl pl-9 pr-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
             </div>
           ))}
-          <button type="submit" className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-purple-900/30">
+          <button type="submit" className="flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-purple-200">
             <FiShield /> Change Password
           </button>
         </form>

@@ -26,7 +26,7 @@ export default function ServicesSection() {
       <div className="max-w-7xl mx-auto px-5">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
           <div>
-            <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+            <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
               Comprehensive Services
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">
@@ -56,7 +56,7 @@ export default function ServicesSection() {
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 px-3 py-1 rounded-full">
                       {s.category}
                     </span>
                     <span className="flex items-center gap-1 text-amber-500 font-bold text-xs">

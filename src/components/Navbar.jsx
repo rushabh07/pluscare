@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaHeartbeat, FaLock, FaUserPlus, FaUserEdit } from 'react-icons/fa';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ProfileModal from './ProfileModal';
+import ThemeToggle from './ThemeToggle';
 
 const links = [
   { label: 'Home', id: 'hero' },
@@ -27,7 +28,7 @@ export default function Navbar({ onBook }) {
       setUser(userInfo);
     }
     const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', fn);
+    window.addEventListener('scroll', fn, { passive: true });
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
@@ -71,34 +72,34 @@ export default function Navbar({ onBook }) {
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200/60' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200/60' : 'bg-white/70 backdrop-blur-sm border-b border-transparent'}`}>
       <div className="max-w-7xl mx-auto px-5 py-3.5 flex items-center justify-between">
         {/* Logo */}
         <button onClick={() => go('hero')} className="flex items-center gap-2 cursor-pointer">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-teal-500 text-white flex items-center justify-center shadow-md">
             <FaHeartbeat className="text-lg" />
           </div>
-          <span className="font-extrabold text-xl text-gray-500">Plus<span className="text-blue-600">Care</span></span>
+          <span className="font-extrabold text-xl text-slate-900">Plus<span className="text-blue-600">Care</span></span>
         </button>
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-7">
-          <button onClick={() => go('hero')} className="text-[14px] font-semibold text-gray-500 hover:text-blue-600 transition-colors cursor-pointer">
+          <button onClick={() => go('hero')} className="text-[14px] font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
             Home
           </button>
-          <Link to="/services" className="text-[14px] font-semibold text-gray-500 hover:text-blue-600 transition-colors">
+          <Link to="/services" className="text-[14px] font-semibold text-slate-700 hover:text-blue-600 transition-colors">
             Services
           </Link>
-          <button onClick={() => go('why')} className="text-[14px] font-semibold text-gray-500 hover:text-blue-600 transition-colors cursor-pointer">
+          <button onClick={() => go('why')} className="text-[14px] font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
             About
           </button>
-          <button onClick={() => go('departments')} className="text-[14px] font-semibold text-gray-500 hover:text-blue-600 transition-colors cursor-pointer">
+          <button onClick={() => go('departments')} className="text-[14px] font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
             Departments
           </button>
-          <button onClick={() => go('doctors')} className="text-[14px] font-semibold text-gray-500 hover:text-blue-600 transition-colors cursor-pointer">
+          <button onClick={() => go('doctors')} className="text-[14px] font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
             Doctors
           </button>
-          <button onClick={() => go('ai')} className="text-[14px] font-semibold text-gray-500 hover:text-blue-600 transition-colors cursor-pointer">
+          <button onClick={() => go('ai')} className="text-[14px] font-semibold text-slate-700 hover:text-blue-600 transition-colors cursor-pointer">
             AI Features
           </button>
         </nav>
@@ -108,7 +109,7 @@ export default function Navbar({ onBook }) {
           {user?.token ? (
             <>
               <Link to={user.role === 'Admin' ? '/admin/dashboard' : `/${user.role.toLowerCase()}/dashboard`}
-                className="flex items-center gap-1.5 text-gray-500 hover:text-blue-600 font-bold text-sm transition-colors">
+                className="flex items-center gap-1.5 text-slate-700 hover:text-blue-600 font-bold text-sm transition-colors">
                 Dashboard
               </Link>
               <button
@@ -137,13 +138,19 @@ export default function Navbar({ onBook }) {
               </Link>
             </>
           )}
+          <ThemeToggle />
           <button onClick={onBook} className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-bold text-sm rounded-xl shadow-md hover:shadow-lg hover:shadow-blue-200 hover:-translate-y-0.5 transition-all cursor-pointer">
             Book Appointment
           </button>
         </div>
 
         {/* Hamburger */}
-        <button className="lg:hidden flex flex-col gap-1.5 cursor-pointer p-1" onClick={() => setOpen(o => !o)}>
+        <button
+          className="lg:hidden flex flex-col gap-1.5 cursor-pointer p-1"
+          onClick={() => setOpen(o => !o)}
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+        >
           <span className={`block h-0.5 w-6 bg-slate-800 rounded transition-all ${open ? 'rotate-45 translate-y-2' : ''}`} />
           <span className={`block h-0.5 w-6 bg-slate-800 rounded transition-all ${open ? 'opacity-0' : ''}`} />
           <span className={`block h-0.5 w-6 bg-slate-800 rounded transition-all ${open ? '-rotate-45 -translate-y-2' : ''}`} />
@@ -178,6 +185,9 @@ export default function Navbar({ onBook }) {
             AI Features
           </button>
           <div className="flex flex-col gap-3 mt-3">
+            <div className="flex justify-center">
+              <ThemeToggle />
+            </div>
             {user?.token ? (
               <>
                 <Link to={user.role === 'Admin' ? '/admin/dashboard' : `/${user.role.toLowerCase()}/dashboard`}

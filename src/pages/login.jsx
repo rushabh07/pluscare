@@ -142,7 +142,7 @@ export default function Login() {
                             className="mt-8 space-y-5"
                         >
                             {errors.api && (
-                                <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl text-sm font-medium">
+                                <div className="p-3 bg-red-100 border border-red-400 text-red-800 rounded-xl text-sm font-medium">
                                     {errors.api}
                                 </div>
                             )}
@@ -151,7 +151,7 @@ export default function Login() {
 
                             <div>
 
-                                <label className="text-sm font-semibold">
+                                <label className="text-sm font-semibold text-slate-900">
                                     Login As
                                 </label>
 
@@ -159,7 +159,7 @@ export default function Login() {
                                     name="role"
                                     value={formData.role}
                                     onChange={handleChange}
-                                    className="w-full mt-2 border rounded-xl px-4 py-3"
+                                    className="w-full mt-2 border border-slate-300 bg-white text-slate-900 rounded-xl px-4 py-3 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                 >
                                     <option>Patient</option>
                                     <option>Doctor</option>
@@ -173,11 +173,11 @@ export default function Login() {
 
                             <div>
 
-                                <label className="text-sm font-semibold">
+                                <label className="text-sm font-semibold text-slate-900">
                                     Email
                                 </label>
 
-                                <div className="mt-2 flex items-center border rounded-xl px-4 py-3">
+                                <div className="mt-2 flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                     <FiMail className="mr-3 text-slate-400" />
 
@@ -187,7 +187,7 @@ export default function Login() {
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="Enter email"
-                                        className="w-full outline-none"
+                                        className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                     />
 
                                 </div>
@@ -204,11 +204,11 @@ export default function Login() {
 
                             <div>
 
-                                <label className="text-sm font-semibold">
+                                <label className="text-sm font-semibold text-slate-900">
                                     Password
                                 </label>
 
-                                <div className="mt-2 flex items-center border rounded-xl px-4 py-3">
+                                <div className="mt-2 flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                     <FiLock className="mr-3 text-slate-400" />
 
@@ -218,12 +218,14 @@ export default function Login() {
                                         value={formData.password}
                                         onChange={handleChange}
                                         placeholder="Enter password"
-                                        className="w-full outline-none"
+                                        className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                     />
 
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
+                                        className="text-slate-500 hover:text-slate-700 cursor-pointer"
+                                        aria-label="Toggle password visibility"
                                     >
                                         {showPassword ? <FiEyeOff /> : <FiEye />}
                                     </button>

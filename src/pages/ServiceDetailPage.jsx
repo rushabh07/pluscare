@@ -63,7 +63,7 @@ export default function ServiceDetailPage() {
                     </div>
                 ) : error ? (
                     <div className="max-w-7xl mx-auto px-5">
-                        <div className="p-8 bg-red-50 border border-red-200 rounded-3xl text-center text-red-600">
+                        <div className="p-8 bg-red-50 border border-red-200 rounded-3xl text-center text-red-800">
                             <FiAlertCircle className="text-4xl mx-auto mb-2 text-red-500" />
                             <p className="font-bold">{error}</p>
                             <Link

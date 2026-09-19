@@ -6,15 +6,16 @@ import {
 } from "react-icons/fi";
 import api, { appointmentService, doctorService, serviceBookingApi, reviewApi } from "../../services/api";
 import ProfileModal from "../../components/ProfileModal";
+import ThemeToggle from "../../components/ThemeToggle";
 
 const STATUS_COLORS = {
-  Pending: "bg-yellow-500/20 text-yellow-400 border border-yellow-500/30",
-  Accepted: "bg-blue-500/20 text-blue-400 border border-blue-500/30",
-  "On The Way": "bg-purple-500/20 text-purple-400 border border-purple-500/30",
-  Started: "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30",
-  Completed: "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30",
-  Cancelled: "bg-red-500/20 text-red-400 border border-red-500/30",
-  Rejected: "bg-rose-500/20 text-rose-400 border border-rose-500/30",
+  Pending: "bg-amber-100 text-amber-800 border border-amber-300",
+  Accepted: "bg-blue-100 text-blue-800 border border-blue-300",
+  "On The Way": "bg-purple-100 text-purple-800 border border-purple-300",
+  Started: "bg-indigo-100 text-indigo-800 border border-indigo-300",
+  Completed: "bg-emerald-100 text-emerald-800 border border-emerald-300",
+  Cancelled: "bg-red-100 text-red-800 border border-red-300",
+  Rejected: "bg-red-100 text-red-800 border border-red-300",
 };
 
 const SERVICE_STATUS_STEPS = ["Pending", "Accepted", "On The Way", "Started", "Completed"];
@@ -51,29 +52,29 @@ function LeaveReviewModal({ booking, onClose, onSuccess }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl max-w-md w-full p-6 text-white space-y-4 shadow-2xl relative">
+      <div className="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 text-slate-900 space-y-4 shadow-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"
         >
           <FiX className="text-xl" />
         </button>
 
         <h3 className="text-lg font-bold">Leave Service Review</h3>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-slate-600">
           How was your experience with <strong>{booking.service?.name}</strong> provided by{" "}
           <strong>{booking.provider?.fullName}</strong>?
         </p>
 
         {error && (
-          <div className="p-3 bg-red-500/10 border border-red-500/30 text-red-400 rounded-xl text-xs flex items-center gap-2">
+          <div className="p-3 bg-red-50 border border-red-200 text-red-800 rounded-xl text-xs flex items-center gap-2">
             <FiAlertCircle /> {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold text-gray-300 mb-2">Rating (1 to 5 Stars)</label>
+            <label className="block text-xs font-bold text-slate-700 mb-2">Rating (1 to 5 Stars)</label>
             <div className="flex items-center gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -81,25 +82,25 @@ function LeaveReviewModal({ booking, onClose, onSuccess }) {
                   type="button"
                   onClick={() => setRating(star)}
                   className={`text-2xl cursor-pointer transition-transform ${
-                    rating >= star ? "text-amber-400 scale-110" : "text-gray-600"
+                    rating >= star ? "text-amber-500 scale-110" : "text-slate-300"
                   }`}
                 >
                   ★
                 </button>
               ))}
-              <span className="ml-2 text-sm font-bold text-amber-400">{rating} / 5</span>
+              <span className="ml-2 text-sm font-bold text-amber-600">{rating} / 5</span>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-gray-300 mb-1.5">Review Comment</label>
+            <label className="block text-xs font-bold text-slate-700 mb-1.5">Review Comment</label>
             <textarea
               rows="3"
               required
               placeholder="Tell us about the service quality, punctuality, and overall satisfaction..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="w-full bg-gray-800 border border-gray-700 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+              className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
             />
           </div>
 
@@ -107,7 +108,7 @@ function LeaveReviewModal({ booking, onClose, onSuccess }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-gray-800 text-gray-300 rounded-xl text-xs font-bold"
+              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"
             >
               Cancel
             </button>
@@ -198,11 +199,11 @@ function InlineBookingForm({ onBooked, onClose }) {
   if (success) {
     return (
       <div className="text-center py-8">
-        <div className="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+        <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
           ✓
         </div>
-        <h3 className="text-lg font-bold text-white mb-2">Appointment Booked!</h3>
-        <p className="text-gray-400 text-sm mb-4">Your appointment has been saved in the database.</p>
+        <h3 className="text-lg font-bold text-slate-900 mb-2">Appointment Booked!</h3>
+        <p className="text-slate-500 text-sm mb-4">Your appointment has been saved in the database.</p>
         <button
           onClick={onClose}
           className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-bold transition-colors"
@@ -216,21 +217,21 @@ function InlineBookingForm({ onBooked, onClose }) {
   return (
     <form onSubmit={submit} className="space-y-4">
       {error && (
-        <div className="p-3 bg-rose-500/10 border border-rose-500/30 text-rose-400 rounded-xl text-xs flex items-center gap-2">
+        <div className="p-3 bg-red-50 border border-red-200 text-red-800 rounded-xl text-xs flex items-center gap-2">
           <FiAlertCircle /> {error}
         </div>
       )}
 
       <div>
-        <label className="block text-xs font-bold text-gray-400 mb-1.5">
-          Select Doctor {loadingDoctors && <span className="text-blue-400 font-normal">(Loading...)</span>}
+        <label className="block text-xs font-bold text-slate-600 mb-1.5">
+          Select Doctor {loadingDoctors && <span className="text-blue-700 font-normal">(Loading...)</span>}
         </label>
         <select
           required
           value={form.doctorId}
           onChange={handleDoctorChange}
           disabled={loadingDoctors}
-          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+          className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
         >
           <option value="">-- Select a Doctor --</option>
           {doctors.map((d) => (
@@ -242,11 +243,11 @@ function InlineBookingForm({ onBooked, onClose }) {
       </div>
 
       <div>
-        <label className="block text-xs font-bold text-gray-400 mb-1.5">Department</label>
+          <label className="block text-xs font-bold text-slate-600 mb-1.5">Department</label>
         <select
           value={form.department}
           onChange={(e) => set("department", e.target.value)}
-          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+          className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
         >
           {["General Medicine", "Cardiology", "Neurology", "Orthopedics", "Oncology"].map((d) => (
             <option key={d}>{d}</option>
@@ -256,22 +257,22 @@ function InlineBookingForm({ onBooked, onClose }) {
 
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-xs font-bold text-gray-400 mb-1.5">Appointment Date</label>
+          <label className="block text-xs font-bold text-slate-600 mb-1.5">Appointment Date</label>
           <input
             type="date"
             required
             value={form.date}
             onChange={(e) => set("date", e.target.value)}
-            className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+            className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
           />
         </div>
         <div>
-          <label className="block text-xs font-bold text-gray-400 mb-1.5">Time Slot</label>
+          <label className="block text-xs font-bold text-slate-600 mb-1.5">Time Slot</label>
           <select
             required
             value={form.time}
             onChange={(e) => set("time", e.target.value)}
-            className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+            className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
           >
             <option value="">Choose time</option>
             {["09:00 AM", "11:30 AM", "02:00 PM", "04:30 PM"].map((t) => (
@@ -282,13 +283,13 @@ function InlineBookingForm({ onBooked, onClose }) {
       </div>
 
       <div>
-        <label className="block text-xs font-bold text-gray-400 mb-1.5">Reason (Optional)</label>
+          <label className="block text-xs font-bold text-slate-600 mb-1.5">Reason (Optional)</label>
         <input
           type="text"
           placeholder="e.g. Routine check-up, Chest pain..."
           value={form.reason}
           onChange={(e) => set("reason", e.target.value)}
-          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-all"
+          className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all"
         />
       </div>
 
@@ -296,7 +297,7 @@ function InlineBookingForm({ onBooked, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="flex-1 py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-sm font-medium transition-colors"
+          className="flex-1 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-medium transition-colors"
         >
           Cancel
         </button>
@@ -371,17 +372,17 @@ export default function PatientDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-6">
+    <div className="min-h-screen pc-page p-6">
       <div className="max-w-5xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-teal-500 rounded-xl flex items-center justify-center text-white shadow-md">
               <FiActivity />
             </div>
             <div>
-              <h1 className="text-xl font-bold">Hello, {user.fullName}</h1>
-              <p className="text-gray-500 text-sm">Patient Dashboard</p>
+              <h1 className="text-xl font-extrabold text-slate-900">Hello, {user.fullName}</h1>
+              <p className="text-slate-500 text-sm">Patient Dashboard</p>
             </div>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
@@ -399,13 +400,14 @@ export default function PatientDashboard() {
             </button>
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
+              className="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
             >
               <FiHome /> Home
             </button>
+            <ThemeToggle />
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 text-sm text-red-400 hover:text-red-300 transition-colors cursor-pointer"
+              className="flex items-center gap-2 text-sm font-semibold text-red-600 hover:text-red-700 transition-colors cursor-pointer"
             >
               <FiLogOut /> Logout
             </button>
@@ -414,49 +416,49 @@ export default function PatientDashboard() {
 
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 flex items-center gap-4">
-            <div className="w-11 h-11 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl">
+          <div className="pc-card p-5 flex items-center gap-4">
+            <div className="w-11 h-11 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center text-xl">
               <FiCalendar />
             </div>
             <div>
-              <p className="text-gray-500 text-sm">Active Service Bookings</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-slate-500 text-sm">Active Service Bookings</p>
+              <p className="text-2xl font-extrabold text-slate-900">
                 {serviceBookings.filter((b) => !["Completed", "Cancelled", "Rejected"].includes(b.status)).length}
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 flex items-center gap-4">
-            <div className="w-11 h-11 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl">
+          <div className="pc-card p-5 flex items-center gap-4">
+            <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-xl">
               ✓
             </div>
             <div>
-              <p className="text-gray-500 text-sm">Completed Services</p>
-              <p className="text-2xl font-bold text-white">
+              <p className="text-slate-500 text-sm">Completed Services</p>
+              <p className="text-2xl font-extrabold text-slate-900">
                 {serviceBookings.filter((b) => b.status === "Completed").length}
               </p>
             </div>
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 flex items-center gap-4">
-            <div className="w-11 h-11 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl">
+          <div className="pc-card p-5 flex items-center gap-4">
+            <div className="w-11 h-11 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center text-xl">
               <FiFileText />
             </div>
             <div>
-              <p className="text-gray-500 text-sm">Clinic Appointments</p>
-              <p className="text-2xl font-bold text-white">{appointments.length}</p>
+              <p className="text-slate-500 text-sm">Clinic Appointments</p>
+              <p className="text-2xl font-extrabold text-slate-900">{appointments.length}</p>
             </div>
           </div>
         </div>
 
         {/* Section Tabs */}
-        <div className="flex border-b border-gray-800 gap-4">
+        <div className="flex border-b border-slate-200 gap-4">
           <button
             onClick={() => setActiveTab("serviceBookings")}
             className={`pb-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
               activeTab === "serviceBookings"
-                ? "border-blue-500 text-blue-400"
-                : "border-transparent text-gray-500 hover:text-gray-300"
+                ? "border-blue-600 text-blue-700"
+                : "border-transparent text-slate-500 hover:text-slate-700"
             }`}
           >
             My Service Bookings ({serviceBookings.length})
@@ -465,8 +467,8 @@ export default function PatientDashboard() {
             onClick={() => setActiveTab("clinicAppointments")}
             className={`pb-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
               activeTab === "clinicAppointments"
-                ? "border-blue-500 text-blue-400"
-                : "border-transparent text-gray-500 hover:text-gray-300"
+                ? "border-blue-600 text-blue-700"
+                : "border-transparent text-slate-500 hover:text-slate-700"
             }`}
           >
             Clinic Appointments ({appointments.length})
@@ -475,25 +477,25 @@ export default function PatientDashboard() {
 
         {/* TAB 1: Service Bookings with Status Tracker and Review Option */}
         {activeTab === "serviceBookings" && (
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-6">
+          <div className="pc-card p-6 space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="font-semibold text-white">Healthcare & Local Service Bookings</h2>
+              <h2 className="font-bold text-slate-900">Healthcare & Local Service Bookings</h2>
               <button
                 onClick={fetchData}
-                className="text-gray-500 hover:text-white text-xs flex items-center gap-1"
+                className="text-slate-500 hover:text-slate-700 text-xs flex items-center gap-1"
               >
                 <FiRefreshCw className={loading ? "animate-spin" : ""} /> Refresh
               </button>
             </div>
 
             {loading ? (
-              <div className="p-8 text-center text-gray-500 text-sm animate-pulse">
+              <div className="p-8 text-center text-slate-500 text-sm animate-pulse">
                 Fetching service bookings from MongoDB...
               </div>
             ) : serviceBookings.length === 0 ? (
               <div className="p-8 text-center">
-                <FiCalendar className="text-4xl text-gray-700 mx-auto mb-3" />
-                <p className="text-gray-500 text-sm font-medium">No service bookings found.</p>
+                <FiCalendar className="text-4xl text-slate-300 mx-auto mb-3" />
+                <p className="text-slate-500 text-sm font-medium">No service bookings found.</p>
                 <Link
                   to="/services"
                   className="mt-3 inline-block px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-bold"
@@ -511,34 +513,34 @@ export default function PatientDashboard() {
                   return (
                     <div
                       key={b._id}
-                      className="bg-gray-950 border border-gray-800 rounded-2xl p-5 space-y-4 shadow-lg"
+                      className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 shadow-sm"
                     >
                       <div className="flex flex-wrap items-start justify-between gap-4">
                         <div>
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-0.5 rounded-full">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-blue-800 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full">
                             {b.service?.category || "Service"}
                           </span>
-                          <h3 className="text-base font-bold text-white mt-1">
+                          <h3 className="text-base font-bold text-slate-900 mt-1">
                             {b.service?.name || "Service Booking"}
                           </h3>
-                          <p className="text-xs text-gray-400 mt-0.5">
+                          <p className="text-xs text-slate-600 mt-0.5">
                             Provider: <strong>{b.provider?.fullName || "Assigned Specialist"}</strong>
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-slate-500">
                             Date: {new Date(b.bookingDate).toLocaleDateString()} @ {b.timeSlot}
                           </p>
-                          <p className="text-xs text-gray-500">Address: {b.address}</p>
+                          <p className="text-xs text-slate-500">Address: {b.address}</p>
                         </div>
 
                         <div className="text-right space-y-2">
                           <span
                             className={`text-xs px-3 py-1 rounded-full font-bold inline-block ${
-                              STATUS_COLORS[b.status] || "bg-gray-800 text-gray-300"
+                              STATUS_COLORS[b.status] || "bg-slate-100 text-slate-600"
                             }`}
                           >
                             {b.status}
                           </span>
-                          <div className="text-sm font-extrabold text-emerald-400">
+                          <div className="text-sm font-extrabold text-emerald-700">
                             ₹{b.totalPrice}
                           </div>
 
@@ -546,7 +548,7 @@ export default function PatientDashboard() {
                           {["Pending", "Accepted"].includes(b.status) && (
                             <button
                               onClick={() => handleCancelServiceBooking(b._id)}
-                              className="block text-xs text-red-400 hover:text-red-300 underline font-semibold ml-auto"
+                              className="block text-xs text-red-600 hover:text-red-700 underline font-semibold ml-auto"
                             >
                               Cancel Booking
                             </button>
@@ -565,11 +567,11 @@ export default function PatientDashboard() {
 
                       {/* Real-time Status Tracker Step Bar */}
                       {!isCancelled && (
-                        <div className="pt-4 border-t border-gray-900 space-y-2">
-                          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                        <div className="pt-4 border-t border-slate-200 space-y-2">
+                          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                             Live Status Tracker
                           </p>
-                          <div className="flex items-center justify-between text-[11px] font-semibold text-gray-400">
+                          <div className="flex items-center justify-between text-[11px] font-semibold text-slate-500">
                             {SERVICE_STATUS_STEPS.map((stepName, idx) => {
                               const isPassed = currentStepIdx >= idx;
                               const isCurrent = currentStepIdx === idx;
@@ -577,12 +579,12 @@ export default function PatientDashboard() {
                                 <div
                                   key={stepName}
                                   className={`flex items-center gap-1 ${
-                                    isPassed ? "text-blue-400 font-bold" : "text-gray-600"
+                                    isPassed ? "text-blue-700 font-bold" : "text-slate-400"
                                   }`}
                                 >
                                   <span
                                     className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] ${
-                                      isPassed ? "bg-blue-600 text-white" : "bg-gray-800 text-gray-500"
+                                      isPassed ? "bg-blue-600 text-white" : "bg-slate-200 text-slate-500"
                                     }`}
                                   >
                                     {isPassed ? "✓" : idx + 1}
@@ -604,9 +606,9 @@ export default function PatientDashboard() {
 
         {/* TAB 2: Clinic Appointments */}
         {activeTab === "clinicAppointments" && (
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6">
+          <div className="pc-card p-6">
             <div className="flex items-center justify-between mb-5">
-              <h2 className="font-semibold text-white">Clinic Appointments</h2>
+              <h2 className="font-bold text-slate-900">Clinic Appointments</h2>
               <button
                 onClick={() => setShowBooking(true)}
                 className="text-xs bg-blue-600 text-white px-3 py-1.5 rounded-lg font-medium"
@@ -616,17 +618,17 @@ export default function PatientDashboard() {
             </div>
 
             {showBooking && (
-              <div className="mb-6 p-5 bg-gray-950 border border-gray-800 rounded-xl">
+              <div className="mb-6 p-5 bg-slate-50 border border-slate-200 rounded-xl">
                 <InlineBookingForm onBooked={() => { setShowBooking(false); fetchData(); }} onClose={() => setShowBooking(false)} />
               </div>
             )}
 
             {appointments.length === 0 ? (
-              <div className="p-8 text-center text-gray-500 text-sm">No clinic appointments.</div>
+              <div className="p-8 text-center text-slate-500 text-sm">No clinic appointments.</div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
-                  <thead className="border-b border-gray-800 text-gray-500 text-left">
+                  <thead className="border-b border-slate-200 text-slate-500 text-left">
                     <tr>
                       <th className="py-2.5 px-3">Doctor</th>
                       <th className="py-2.5 px-3">Department</th>
@@ -634,12 +636,12 @@ export default function PatientDashboard() {
                       <th className="py-2.5 px-3">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-800">
+                  <tbody className="divide-y divide-slate-100">
                     {appointments.map((a) => (
                       <tr key={a._id}>
-                        <td className="py-3 px-3 font-medium text-white">{a.doctor?.fullName || "—"}</td>
-                        <td className="py-3 px-3 text-gray-400">{a.department}</td>
-                        <td className="py-3 px-3 text-gray-400">
+                        <td className="py-3 px-3 font-medium text-slate-900">{a.doctor?.fullName || "—"}</td>
+                        <td className="py-3 px-3 text-slate-600">{a.department}</td>
+                        <td className="py-3 px-3 text-slate-600">
                           {a.appointmentDate ? new Date(a.appointmentDate).toLocaleDateString() : "—"}
                         </td>
                         <td className="py-3 px-3">

@@ -140,12 +140,12 @@ export default function ServicesManagement() {
   const categories = ["All", ...new Set(services.map((s) => s.category))];
 
   return (
-    <div className="space-y-6 text-white">
+    <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold">Services & Providers Management</h1>
-          <p className="text-gray-400 text-xs mt-1">
+          <p className="text-slate-600 text-xs mt-1">
             Real MongoDB statistics and administration for services, categories, and provider assignments.
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function ServicesManagement() {
         <div className="flex items-center gap-3">
           <button
             onClick={fetchData}
-            className="p-2.5 bg-gray-900 border border-gray-800 hover:bg-gray-800 text-gray-300 rounded-xl text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+            className="p-2.5 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
           >
             <FiRefreshCw className={loading ? "animate-spin" : ""} /> Refresh
           </button>
@@ -168,12 +168,12 @@ export default function ServicesManagement() {
 
       {/* Notifications */}
       {success && (
-        <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl text-sm flex items-center gap-2">
+        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-sm flex items-center gap-2">
           <FiCheckCircle /> {success}
         </div>
       )}
       {error && (
-        <div className="p-4 bg-rose-500/10 border border-rose-500/30 text-rose-400 rounded-xl text-sm flex items-center gap-2">
+        <div className="p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl text-sm flex items-center gap-2">
           <FiAlertCircle /> {error}
         </div>
       )}
@@ -181,66 +181,66 @@ export default function ServicesManagement() {
       {/* Live MongoDB Service Statistics */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-1">
-            <span className="text-xs text-gray-400 flex items-center gap-1.5">
-              <FiLayers className="text-blue-400" /> Total Services
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-1">
+            <span className="text-xs text-slate-600 flex items-center gap-1.5">
+              <FiLayers className="text-blue-700" /> Total Services
             </span>
-            <p className="text-2xl font-extrabold text-white">{stats.totalServices}</p>
-            <span className="text-[10px] text-emerald-400 font-medium">
+            <p className="text-2xl font-extrabold text-slate-900">{stats.totalServices}</p>
+            <span className="text-[10px] text-emerald-700 font-medium">
               {stats.activeServices} Active & Bookable
             </span>
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-1">
-            <span className="text-xs text-gray-400 flex items-center gap-1.5">
-              <FiCalendar className="text-purple-400" /> Total Service Bookings
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-1">
+            <span className="text-xs text-slate-600 flex items-center gap-1.5">
+              <FiCalendar className="text-purple-600" /> Total Service Bookings
             </span>
-            <p className="text-2xl font-extrabold text-white">{stats.totalBookings}</p>
-            <span className="text-[10px] text-gray-400">
+            <p className="text-2xl font-extrabold text-slate-900">{stats.totalBookings}</p>
+            <span className="text-[10px] text-slate-600">
               {stats.completedBookings} Completed
             </span>
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-1">
-            <span className="text-xs text-gray-400 flex items-center gap-1.5">
-              <FiDollarSign className="text-emerald-400" /> Live Revenue
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-1">
+            <span className="text-xs text-slate-600 flex items-center gap-1.5">
+              <FiDollarSign className="text-emerald-700" /> Live Revenue
             </span>
-            <p className="text-2xl font-extrabold text-emerald-400">₹{stats.totalRevenue}</p>
-            <span className="text-[10px] text-gray-400">From verified bookings</span>
+            <p className="text-2xl font-extrabold text-emerald-700">₹{stats.totalRevenue}</p>
+            <span className="text-[10px] text-slate-600">From verified bookings</span>
           </div>
 
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-1">
-            <span className="text-xs text-gray-400 flex items-center gap-1.5">
-              <FiStar className="text-amber-400" /> Avg Service Rating
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 space-y-1">
+            <span className="text-xs text-slate-600 flex items-center gap-1.5">
+              <FiStar className="text-amber-600" /> Avg Service Rating
             </span>
-            <p className="text-2xl font-extrabold text-amber-400">★ {stats.avgRating}</p>
-            <span className="text-[10px] text-gray-400">({stats.totalReviews} total reviews)</span>
+            <p className="text-2xl font-extrabold text-amber-600">★ {stats.avgRating}</p>
+            <span className="text-[10px] text-slate-600">({stats.totalReviews} total reviews)</span>
           </div>
         </div>
       )}
 
       {/* Services Table & Controls */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-6">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           {/* Search */}
           <div className="relative flex-1 max-w-md">
-            <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500" />
+            <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="text"
               placeholder="Search services by name or category..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-gray-950 border border-gray-800 rounded-xl text-xs text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500"
             />
           </div>
 
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">Category:</span>
+            <span className="text-xs text-slate-600">Category:</span>
             <select
               value={categoryFilter}
               onChange={(e) => setCategoryFilter(e.target.value)}
-              className="bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none"
+              className="bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none"
             >
               {categories.map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -251,17 +251,17 @@ export default function ServicesManagement() {
 
         {/* Table */}
         {loading ? (
-          <div className="py-12 text-center text-sm text-gray-500 animate-pulse">
+          <div className="py-12 text-center text-sm text-slate-500 animate-pulse">
             Loading services from MongoDB...
           </div>
         ) : filteredServices.length === 0 ? (
-          <div className="py-12 text-center text-gray-500 text-sm">
+          <div className="py-12 text-center text-slate-500 text-sm">
             No services found matching search criteria.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-gray-800 bg-gray-950/60 text-gray-400 text-left text-xs font-semibold">
+              <thead className="border-b border-slate-200 bg-slate-50 text-slate-600 text-left text-xs font-semibold">
                 <tr>
                   <th className="py-3 px-4">Service</th>
                   <th className="py-3 px-4">Category</th>
@@ -272,41 +272,41 @@ export default function ServicesManagement() {
                   <th className="py-3 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-800">
+              <tbody className="divide-y divide-slate-100">
                 {filteredServices.map((s) => (
-                  <tr key={s._id} className="hover:bg-gray-800/30 transition-colors">
+                  <tr key={s._id} className="hover:bg-slate-50 transition-colors">
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-3">
                         <img
                           src={s.image}
                           alt={s.name}
-                          className="w-10 h-10 rounded-lg object-cover bg-gray-800 flex-shrink-0"
+                          className="w-10 h-10 rounded-lg object-cover bg-slate-100 flex-shrink-0"
                         />
                         <div>
-                          <div className="font-bold text-white text-sm">{s.name}</div>
-                          <div className="text-xs text-gray-500 line-clamp-1 max-w-xs">
+                          <div className="font-bold text-slate-900 text-sm">{s.name}</div>
+                          <div className="text-xs text-slate-500 line-clamp-1 max-w-xs">
                             {s.description}
                           </div>
                         </div>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-gray-300">
-                      <span className="bg-gray-800 border border-gray-700 text-blue-400 px-2.5 py-0.5 rounded-full text-xs font-medium">
+                    <td className="py-3.5 px-4 text-slate-600">
+                      <span className="bg-blue-50 border border-blue-200 text-blue-800 px-2.5 py-0.5 rounded-full text-xs font-medium">
                         {s.category}
                       </span>
                     </td>
-                    <td className="py-3.5 px-4 font-bold text-emerald-400">₹{s.price}</td>
-                    <td className="py-3.5 px-4 text-gray-400">{s.duration || 30} mins</td>
-                    <td className="py-3.5 px-4 text-amber-400 font-bold">
-                      ★ {s.rating || "5.0"} <span className="text-xs text-gray-500">({s.numReviews})</span>
+                    <td className="py-3.5 px-4 font-bold text-emerald-700">₹{s.price}</td>
+                    <td className="py-3.5 px-4 text-slate-600">{s.duration || 30} mins</td>
+                    <td className="py-3.5 px-4 text-amber-600 font-bold">
+                      ★ {s.rating || "5.0"} <span className="text-xs text-slate-500">({s.numReviews})</span>
                     </td>
                     <td className="py-3.5 px-4">
                       {s.isAvailable ? (
-                        <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-0.5 rounded-full text-[11px] font-bold">
+                        <span className="bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-0.5 rounded-full text-[11px] font-bold">
                           Available
                         </span>
                       ) : (
-                        <span className="bg-rose-500/20 text-rose-400 border border-rose-500/30 px-2.5 py-0.5 rounded-full text-[11px] font-bold">
+                        <span className="bg-red-100 text-red-800 border border-red-300 px-2.5 py-0.5 rounded-full text-[11px] font-bold">
                           Inactive
                         </span>
                       )}
@@ -314,14 +314,14 @@ export default function ServicesManagement() {
                     <td className="py-3.5 px-4 text-right space-x-2">
                       <button
                         onClick={() => openEditModal(s)}
-                        className="p-2 bg-gray-800 hover:bg-gray-700 text-blue-400 rounded-lg transition-colors cursor-pointer"
+                        className="p-2 bg-slate-100 hover:bg-slate-200 text-blue-700 rounded-lg transition-colors cursor-pointer"
                         title="Edit Service"
                       >
                         <FiEdit2 />
                       </button>
                       <button
                         onClick={() => handleDelete(s._id, s.name)}
-                        className="p-2 bg-gray-800 hover:bg-gray-700 text-rose-400 rounded-lg transition-colors cursor-pointer"
+                        className="p-2 bg-slate-100 hover:bg-slate-200 text-rose-600 rounded-lg transition-colors cursor-pointer"
                         title="Delete Service"
                       >
                         <FiTrash2 />
@@ -338,10 +338,10 @@ export default function ServicesManagement() {
       {/* Add / Edit Service Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl max-w-xl w-full p-6 text-white space-y-4 shadow-2xl relative">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-xl w-full p-6 text-slate-900 space-y-4 shadow-2xl relative">
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"
             >
               <FiX className="text-xl" />
             </button>
@@ -352,58 +352,58 @@ export default function ServicesManagement() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Service Name *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Service Name *</label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-400 mb-1">Category *</label>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Category *</label>
                   <input
                     type="text"
                     required
                     placeholder="e.g. Cardiology, Telehealth"
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-400 mb-1">Price (₹) *</label>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Price (₹) *</label>
                   <input
                     type="number"
                     required
                     min="0"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-gray-400 mb-1">Duration (minutes)</label>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Duration (minutes)</label>
                   <input
                     type="number"
                     min="5"
                     value={formData.duration}
                     onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
-                    className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-gray-400 mb-1">Status</label>
+                  <label className="block text-xs font-bold text-slate-600 mb-1">Status</label>
                   <select
                     value={formData.isAvailable ? "true" : "false"}
                     onChange={(e) => setFormData({ ...formData, isAvailable: e.target.value === "true" })}
-                    className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                    className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                   >
                     <option value="true">Available</option>
                     <option value="false">Inactive / Unavailable</option>
@@ -412,33 +412,33 @@ export default function ServicesManagement() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Image URL</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Image URL</label>
                 <input
                   type="text"
                   value={formData.image}
                   onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Description *</label>
+                <label className="block text-xs font-bold text-slate-600 mb-1">Description *</label>
                 <textarea
                   rows="3"
                   required
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full bg-gray-950 border border-gray-800 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-blue-500"
+                  className="w-full bg-white border border-slate-300 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-gray-400 mb-1">Assign Providers / Doctors</label>
-                <div className="max-h-32 overflow-y-auto space-y-1 p-2 bg-gray-950 border border-gray-800 rounded-xl text-xs">
+                <label className="block text-xs font-bold text-slate-600 mb-1">Assign Providers / Doctors</label>
+                <div className="max-h-32 overflow-y-auto space-y-1 p-2 bg-white border border-slate-300 rounded-xl text-xs">
                   {doctors.map((doc) => {
                     const isChecked = formData.providers.includes(doc._id);
                     return (
-                      <label key={doc._id} className="flex items-center gap-2 p-1.5 hover:bg-gray-900 rounded cursor-pointer">
+                      <label key={doc._id} className="flex items-center gap-2 p-1.5 hover:bg-slate-100 rounded cursor-pointer">
                         <input
                           type="checkbox"
                           checked={isChecked}
@@ -465,7 +465,7 @@ export default function ServicesManagement() {
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-4 py-2 bg-gray-800 hover:bg-gray-700 text-gray-300 rounded-xl text-xs font-bold"
+                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold"
                 >
                   Cancel
                 </button>
