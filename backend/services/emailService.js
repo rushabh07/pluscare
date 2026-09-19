@@ -5,6 +5,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // ═══════════════════════════════════════════════════════════════
+// EMAIL KILL-SWITCH — temporarily disable all outgoing emails
+// Set EMAIL_ENABLED=false in backend/.env to disable.
+// Set EMAIL_ENABLED=true (or remove it) to re-enable.
+// When disabled: Nodemailer + Supabase OTP sends are skipped,
+// functions log to console and return early so the app keeps working.
+// ═══════════════════════════════════════════════════════════════
+const EMAIL_ENABLED = process.env.EMAIL_ENABLED?.toLowerCase() !== "false";
+if (!EMAIL_ENABLED) {
+    console.warn("[emailService] EMAIL_ENABLED=false — all outgoing emails are TEMPORARILY DISABLED.");
+}
+
+// ═══════════════════════════════════════════════════════════════
 // Supabase Client — server-side only, NEVER expose to frontend
 // Used for OTP forgot-password flow via Supabase Auth email templates
 // ═══════════════════════════════════════════════════════════════
@@ -51,6 +63,12 @@ export const sendForgotPasswordOtp = async (email) => {
     const expiresAt = Date.now() + 10 * 60 * 1000;
 
     otpStore.set(normalizedEmail, { otp: otpCode, expiresAt });
+
+    // ── Kill-switch: skip all email delivery, but keep OTP flow testable ──
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Forgot-password OTP for ${normalizedEmail}: ${otpCode} (valid 10 min, check backend console)`);
+        return { success: true, provider: "disabled", disabled: true, devOtp: otpCode };
+    }
 
     // Also trigger Supabase Auth OTP session in parallel if configured
     try {
@@ -269,6 +287,10 @@ const buildAppointmentDetails = (appointment) => ({
  * Send Booking Receipt Email
  */
 export const sendBookingReceipt = async (booking, userEmail, userName) => {
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Skipped booking receipt to ${userEmail}`);
+        return false;
+    }
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
         console.warn("EMAIL_USER or EMAIL_PASSWORD not set. Skipping email send.");
         return false;
@@ -298,6 +320,10 @@ export const sendBookingReceipt = async (booking, userEmail, userName) => {
  * Send Booking Cancellation Email
  */
 export const sendBookingCancellation = async (booking, userEmail, userName) => {
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Skipped booking cancellation to ${userEmail}`);
+        return false;
+    }
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
         console.warn("EMAIL_USER or EMAIL_PASSWORD not set. Skipping email send.");
         return false;
@@ -366,6 +392,10 @@ const appointmentEmailConfig = {
  * @param {string} eventType - "booked" | "Confirmed" | "Cancelled" | "Completed"
  */
 export const sendAppointmentEmail = async (appointment, userEmail, userName, eventType) => {
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Skipped appointment (${eventType}) email to ${userEmail}`);
+        return false;
+    }
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
         console.warn("EMAIL_USER or EMAIL_PASSWORD not set. Skipping email send.");
         return false;
@@ -400,6 +430,10 @@ export const sendAppointmentEmail = async (appointment, userEmail, userName, eve
  * Send Login Notification Email
  */
 export const sendLoginNotificationEmail = async (userEmail, userName, details = {}) => {
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Skipped login notification to ${userEmail}`);
+        return false;
+    }
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
         console.warn("EMAIL_USER or EMAIL_PASSWORD not set. Skipping login notification email.");
         return false;
@@ -440,6 +474,10 @@ export const sendLoginNotificationEmail = async (userEmail, userName, details = 
  * Send Welcome / Registration Notification Email
  */
 export const sendRegisterNotificationEmail = async (userEmail, userName, role = "Patient") => {
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Skipped register notification to ${userEmail}`);
+        return false;
+    }
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
         console.warn("EMAIL_USER or EMAIL_PASSWORD not set. Skipping register notification email.");
         return false;
@@ -478,6 +516,10 @@ export const sendRegisterNotificationEmail = async (userEmail, userName, role = 
  * Send Booking Status Update Email
  */
 export const sendBookingStatusUpdateEmail = async (booking, userEmail, userName, newStatus) => {
+    if (!EMAIL_ENABLED) {
+        console.log(`[emailService DISABLED] Skipped booking status (${newStatus}) email to ${userEmail}`);
+        return false;
+    }
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASSWORD) {
         console.warn("EMAIL_USER or EMAIL_PASSWORD not set. Skipping booking status email.");
         return false;

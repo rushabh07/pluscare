@@ -75,42 +75,42 @@ export default function Patients() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Patients</h1>
-          <p className="text-gray-500 text-sm mt-1">{patients.length} patients registered</p>
+          <h1 className="text-2xl font-bold text-slate-900">Patients</h1>
+          <p className="text-slate-500 text-sm mt-1">{patients.length} patients registered</p>
         </div>
-        <button onClick={openAdd} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-blue-900/30">
+        <button onClick={openAdd} className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl text-sm font-medium transition-all shadow-lg shadow-blue-200">
           <FiPlus /> Add Patient
         </button>
       </div>
 
       {(error || success) && (
-        <div className={`px-4 py-3 rounded-xl text-sm ${error ? "bg-red-500/10 text-red-400 border border-red-500/20" : "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"}`}>
+        <div className={`px-4 py-3 rounded-xl text-sm ${error ? "bg-red-50 text-red-800 border border-red-200" : "bg-emerald-50 text-emerald-800 border border-emerald-200"}`}>
           {error || success}
         </div>
       )}
 
       {/* Search */}
       <div className="relative">
-        <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
+        <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by name, email, or phone..."
-          className="w-full bg-gray-900 border border-gray-800 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 transition-all"
+          className="w-full bg-white border border-slate-200 rounded-xl pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-all"
         />
       </div>
 
       {/* Table */}
-      <div className="bg-gray-900 border border-gray-800 rounded-2xl overflow-hidden">
+      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-gray-500 text-sm animate-pulse">Loading patients...</div>
+          <div className="p-8 text-center text-slate-500 text-sm animate-pulse">Loading patients...</div>
         ) : filtered.length === 0 ? (
-          <div className="p-8 text-center text-gray-500 text-sm">No patients found.</div>
+          <div className="p-8 text-center text-slate-500 text-sm">No patients found.</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead className="border-b border-gray-800 bg-gray-800/50">
-                <tr className="text-gray-500 text-left">
+              <thead className="border-b border-slate-200 bg-slate-50">
+                <tr className="text-slate-500 text-left">
                   <th className="px-5 py-3 font-medium">Name</th>
                   <th className="px-5 py-3 font-medium">Email</th>
                   <th className="px-5 py-3 font-medium">Phone</th>
@@ -119,20 +119,20 @@ export default function Patients() {
                   <th className="px-5 py-3 font-medium">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-800">
+              <tbody className="divide-y divide-slate-100">
                 {filtered.map((p) => (
-                  <tr key={p._id} className="hover:bg-gray-800/40 transition-colors">
-                    <td className="px-5 py-3 text-white font-medium">{p.fullName}</td>
-                    <td className="px-5 py-3 text-gray-400">{p.email}</td>
-                    <td className="px-5 py-3 text-gray-400">{p.phone}</td>
-                    <td className="px-5 py-3 text-gray-400">{p.gender}</td>
-                    <td className="px-5 py-3 text-gray-400">{p.dob ? new Date(p.dob).toLocaleDateString() : "—"}</td>
+                  <tr key={p._id} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-5 py-3 text-slate-900 font-medium">{p.fullName}</td>
+                    <td className="px-5 py-3 text-slate-600">{p.email}</td>
+                    <td className="px-5 py-3 text-slate-600">{p.phone}</td>
+                    <td className="px-5 py-3 text-slate-600">{p.gender}</td>
+                    <td className="px-5 py-3 text-slate-600">{p.dob ? new Date(p.dob).toLocaleDateString() : "—"}</td>
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-2">
-                        <button onClick={() => openEdit(p)} className="p-1.5 rounded-lg text-blue-400 hover:bg-blue-500/10 transition-all">
+                        <button onClick={() => openEdit(p)} className="p-1.5 rounded-lg text-blue-700 hover:bg-blue-50 transition-all">
                           <FiEdit2 />
                         </button>
-                        <button onClick={() => handleDelete(p._id)} className="p-1.5 rounded-lg text-red-400 hover:bg-red-500/10 transition-all">
+                        <button onClick={() => handleDelete(p._id)} className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-all">
                           <FiTrash2 />
                         </button>
                       </div>
@@ -148,13 +148,13 @@ export default function Patients() {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl w-full max-w-md shadow-2xl">
-            <div className="flex items-center justify-between p-5 border-b border-gray-800">
-              <h2 className="font-semibold text-white">{editId ? "Edit Patient" : "Add Patient"}</h2>
-              <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-white transition-colors"><FiX /></button>
+          <div className="bg-white border border-slate-200 rounded-2xl w-full max-w-md shadow-2xl">
+            <div className="flex items-center justify-between p-5 border-b border-slate-200">
+              <h2 className="font-semibold text-slate-900">{editId ? "Edit Patient" : "Add Patient"}</h2>
+              <button onClick={() => setShowModal(false)} className="text-slate-500 hover:text-slate-700 transition-colors"><FiX /></button>
             </div>
             <form onSubmit={handleSubmit} className="p-5 space-y-3">
-              {error && <p className="text-red-400 text-xs">{error}</p>}
+              {error && <p className="text-red-600 text-xs">{error}</p>}
               {[
                 { name: "fullName", label: "Full Name", type: "text" },
                 { name: "email",    label: "Email",     type: "email" },
@@ -163,28 +163,28 @@ export default function Patients() {
                 { name: "address",  label: "Address",   type: "text" },
               ].map((f) => (
                 <div key={f.name}>
-                  <label className="block text-xs text-gray-500 mb-1">{f.label}</label>
+                  <label className="block text-xs text-slate-500 mb-1">{f.label}</label>
                   <input
                     type={f.type}
                     required={!["dob", "address"].includes(f.name)}
                     value={form[f.name]}
                     onChange={(e) => setForm({ ...form, [f.name]: e.target.value })}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition-all"
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all"
                   />
                 </div>
               ))}
               <div>
-                <label className="block text-xs text-gray-500 mb-1">Gender</label>
+                <label className="block text-xs text-slate-500 mb-1">Gender</label>
                 <select value={form.gender} onChange={(e) => setForm({ ...form, gender: e.target.value })}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition-all">
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all">
                   <option>Male</option><option>Female</option><option>Other</option>
                 </select>
               </div>
               {!editId && (
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Password</label>
+                  <label className="block text-xs text-slate-500 mb-1">Password</label>
                   <input type="password" required value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })}
-                    className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition-all" />
+                    className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-sm text-slate-900 focus:outline-none focus:border-blue-500 transition-all" />
                 </div>
               )}
               <button type="submit" className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl text-sm font-medium transition-all">

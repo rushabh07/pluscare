@@ -9,18 +9,24 @@ export default function PricingSection() {
     <section id="pricing" className="py-24 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-5">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Health Packages</span>
+          <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Health Packages</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Integrated Primary Care Plans</h2>
           <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-7">Direct care, 24/7 hotlines, and smart monitoring. Save 20% on annual billing.</p>
 
           {/* Toggle */}
           <div className="inline-flex items-center gap-3 bg-white border border-slate-200 px-4 py-2 rounded-full">
             <span className={`text-xs font-bold transition-colors ${!annual ? 'text-slate-900' : 'text-slate-400'}`}>Monthly</span>
-            <button onClick={() => setAnnual(a => !a)} className={`w-11 h-6 rounded-full relative cursor-pointer transition-colors ${annual ? 'bg-blue-600' : 'bg-slate-200'}`}>
+            <button
+              onClick={() => setAnnual(a => !a)}
+              role="switch"
+              aria-checked={annual}
+              aria-label="Toggle annual billing"
+              className={`w-11 h-6 rounded-full relative cursor-pointer transition-colors ${annual ? 'bg-blue-600' : 'bg-slate-200'}`}
+            >
               <span className={`absolute top-1 left-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${annual ? 'translate-x-5' : ''}`} />
             </button>
             <span className={`text-xs font-bold flex items-center gap-1.5 transition-colors ${annual ? 'text-slate-900' : 'text-slate-400'}`}>
-              Annual <span className="bg-teal-50 text-teal-600 text-[9px] font-bold px-1.5 py-0.5 rounded">Save 20%</span>
+              Annual <span className="bg-teal-50 text-teal-800 text-[9px] font-bold px-1.5 py-0.5 rounded">Save 20%</span>
             </span>
           </div>
         </div>

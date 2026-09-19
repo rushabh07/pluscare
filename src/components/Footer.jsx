@@ -47,7 +47,7 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div className="lg:col-span-2">
-          <h4 className="text-sm font-bold text-white mb-5 uppercase tracking-wider">Quick Links</h4>
+          <h2 className="text-sm font-bold text-white mb-5 uppercase tracking-wider">Quick Links</h2>
           <ul className="flex flex-col gap-3">
             {quickLinks.map(l => (
               <li key={l.id}><button onClick={() => go(l.id)} className="text-xs hover:text-white transition-colors cursor-pointer">{l.label}</button></li>
@@ -57,7 +57,7 @@ export default function Footer() {
 
         {/* Specialties */}
         <div className="lg:col-span-2">
-          <h4 className="text-sm font-bold text-white mb-5 uppercase tracking-wider">Specialties</h4>
+          <h2 className="text-sm font-bold text-white mb-5 uppercase tracking-wider">Specialties</h2>
           <ul className="flex flex-col gap-3">
             {specialties.map(l => (
               <li key={l.label}><button onClick={() => go(l.id)} className="text-xs hover:text-white transition-colors cursor-pointer">{l.label}</button></li>
@@ -67,10 +67,10 @@ export default function Footer() {
 
         {/* Newsletter */}
         <div className="lg:col-span-4">
-          <h4 className="text-sm font-bold text-white mb-5 uppercase tracking-wider">Stay Connected</h4>
+          <h2 className="text-sm font-bold text-white mb-5 uppercase tracking-wider">Stay Connected</h2>
           <p className="text-xs leading-relaxed mb-5">Subscribe for vetted medical tips, platform updates, and seasonal wellness advice from our clinical team.</p>
           <form onSubmit={e => e.preventDefault()} className="flex gap-2">
-            <input type="email" placeholder="Enter your email" className="flex-1 bg-slate-800 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-blue-500 transition-colors" />
+            <input type="email" required aria-label="Email address for newsletter" placeholder="Enter your email" className="flex-1 min-w-0 bg-slate-800 border border-slate-700/80 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 outline-none focus:border-blue-500 transition-colors" />
             <button type="submit" className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold cursor-pointer transition-colors shrink-0">Join</button>
           </form>
         </div>

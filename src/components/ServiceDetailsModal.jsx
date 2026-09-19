@@ -94,7 +94,7 @@ function DoctorProfileOverlay({ provider, onClose, onBookNow }) {
                             <p className="text-xs font-bold text-slate-500 uppercase mb-2">Skills & Expertise</p>
                             <div className="flex flex-wrap gap-1.5">
                                 {provider.skills.map((skill, i) => (
-                                    <span key={i} className="text-[10px] bg-blue-50 text-blue-700 font-semibold px-2.5 py-1 rounded-full border border-blue-100">
+                                    <span key={i} className="text-[10px] bg-blue-50 text-blue-800 font-semibold px-2.5 py-1 rounded-full border border-blue-100">
                                         {skill}
                                     </span>
                                 ))}
@@ -186,7 +186,7 @@ function DoctorCard({ provider, isSelected, onSelect, onViewProfile }) {
                         <span
                             className={`text-[9px] font-bold px-2 py-0.5 rounded-full flex-shrink-0 ${
                                 isAvailable
-                                    ? "bg-emerald-100 text-emerald-700"
+                                    ? "bg-emerald-100 text-emerald-800"
                                     : "bg-slate-200 text-slate-500"
                             }`}
                         >
@@ -487,7 +487,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                 <p className="text-slate-500 font-medium text-sm">Loading service from MongoDB...</p>
                             </div>
                         ) : error ? (
-                            <div className="py-12 text-center text-red-600 bg-red-50 rounded-2xl p-6 border border-red-100">
+                            <div className="py-12 text-center text-red-800 bg-red-50 rounded-2xl p-6 border border-red-100">
                                 <FiAlertCircle className="text-4xl mx-auto mb-2 text-red-500" />
                                 <p className="font-bold">{error}</p>
                                 <button
@@ -542,7 +542,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
 
                                 {/* Error banner */}
                                 {bookingError && (
-                                    <div className="mb-5 p-4 bg-red-50 border border-red-200 text-red-700 rounded-xl text-sm flex items-center gap-3">
+                                    <div className="mb-5 p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl text-sm flex items-center gap-3">
                                         <FiAlertCircle className="text-xl flex-shrink-0" />
                                         <span>{bookingError}</span>
                                     </div>
@@ -563,7 +563,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                             </div>
                                             <div className="md:col-span-2 space-y-3">
                                                 <div className="flex flex-wrap items-center gap-2">
-                                                    <span className="bg-blue-50 text-blue-700 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+                                                    <span className="bg-blue-50 text-blue-800 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
                                                         {data.service.category}
                                                     </span>
                                                     <span className="flex items-center gap-1 text-amber-500 font-bold text-xs bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
@@ -571,11 +571,11 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                                         {data.service.rating || "5.0"} ({data.service.numReviews || 0} reviews)
                                                     </span>
                                                     {data.service.isAvailable ? (
-                                                        <span className="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full border border-emerald-200">
+                                                        <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-200">
                                                             ✓ Available
                                                         </span>
                                                     ) : (
-                                                        <span className="text-[10px] font-bold bg-red-100 text-red-700 px-2.5 py-1 rounded-full">
+                                                        <span className="text-[10px] font-bold bg-red-100 text-red-800 px-2.5 py-1 rounded-full">
                                                             Unavailable
                                                         </span>
                                                     )}
@@ -620,7 +620,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                             </div>
 
                                             {providers.length === 0 && !providersLoading ? (
-                                                <div className="p-5 bg-amber-50 border border-amber-200 rounded-2xl text-sm text-amber-700 flex items-center gap-3">
+                                                <div className="p-5 bg-amber-50 border border-amber-200 rounded-2xl text-sm text-amber-800 flex items-center gap-3">
                                                     <FiAlertCircle className="text-xl flex-shrink-0" />
                                                     <span>
                                                         No providers registered for <strong>{data.service.category}</strong> yet.
@@ -742,7 +742,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                                         Fetching available slots...
                                                     </div>
                                                 ) : availableSlots.length === 0 ? (
-                                                    <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-700">
+                                                    <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-sm text-amber-800">
                                                         No slots available for this date. Please choose another date.
                                                     </div>
                                                 ) : (
@@ -891,7 +891,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                 {/* ═══════════ STEP 4: Booking Confirmed ═══════════ */}
                                 {step === 4 && confirmedBooking && !showReceipt && (
                                     <div className="py-6 text-center space-y-6">
-                                        <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-4xl mx-auto shadow-lg animate-bounce">
+                                        <div className="w-20 h-20 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center text-4xl mx-auto shadow-lg animate-bounce">
                                             ✓
                                         </div>
                                         <div>
@@ -922,7 +922,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                             <ConfirmRow label="Price" value={`₹${confirmedBooking.totalPrice}`} />
                                             <div className="flex justify-between items-center">
                                                 <span className="text-[10px] font-bold text-slate-500 uppercase">Email Status</span>
-                                                <span className={`text-xs font-extrabold px-3 py-1 rounded-full border ${confirmedBooking.emailDeliveryStatus === 'Success' ? 'text-emerald-600 bg-emerald-50 border-emerald-200' : 'text-rose-600 bg-rose-50 border-rose-200'}`}>
+                                                <span className={`text-xs font-extrabold px-3 py-1 rounded-full border ${confirmedBooking.emailDeliveryStatus === 'Success' ? 'text-emerald-800 bg-emerald-50 border-emerald-200' : 'text-rose-800 bg-rose-50 border-rose-200'}`}>
                                                     {confirmedBooking.emailDeliveryStatus || 'Unknown'}
                                                 </span>
                                             </div>
@@ -932,7 +932,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                             <div className="flex gap-3">
                                                 <button
                                                     onClick={() => setShowReceipt(true)}
-                                                    className="flex-1 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold border border-blue-200 rounded-xl text-xs transition-colors cursor-pointer"
+                                                    className="flex-1 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-800 font-bold border border-blue-200 rounded-xl text-xs transition-colors cursor-pointer"
                                                 >
                                                     View Receipt
                                                 </button>
@@ -951,7 +951,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                                 {resending ? "Resending..." : "Resend Receipt"}
                                             </button>
                                             {resendStatus && (
-                                                <div className={`text-xs p-2 rounded-lg ${resendStatus.includes("Failed") ? "bg-red-50 text-red-600" : "bg-emerald-50 text-emerald-600"}`}>
+                                                <div className={`text-xs p-2 rounded-lg ${resendStatus.includes("Failed") ? "bg-red-50 text-red-800" : "bg-emerald-50 text-emerald-800"}`}>
                                                     {resendStatus}
                                                 </div>
                                             )}
@@ -983,7 +983,7 @@ export default function ServiceDetailsModal({ serviceId, onClose, onBookingSucce
                                                 <button onClick={handleDownloadReceipt} className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold cursor-pointer transition-colors">
                                                     Print
                                                 </button>
-                                                <button onClick={() => setShowReceipt(false)} className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg text-xs font-bold cursor-pointer transition-colors">
+                                                <button onClick={() => setShowReceipt(false)} className="px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-800 rounded-lg text-xs font-bold cursor-pointer transition-colors">
                                                     Back
                                                 </button>
                                             </div>

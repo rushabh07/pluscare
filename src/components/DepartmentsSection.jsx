@@ -5,7 +5,7 @@ export default function DepartmentsSection({ onBook }) {
     <section id="departments" className="py-24 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-5">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Clinical Specialties</span>
+          <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Clinical Specialties</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Specialized Medical Divisions</h2>
           <p className="text-slate-500 text-sm md:text-base leading-relaxed">Browse our key clinical divisions managed by award-winning specialist leads and fully certified staff.</p>
         </div>

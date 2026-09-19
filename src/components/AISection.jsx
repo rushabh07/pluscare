@@ -61,7 +61,7 @@ function FormattedMessage({ text }) {
     const parts = str.split(/(\*\*.*?\*\*)/g);
     return parts.map((part, i) => {
       if (part.startsWith('**') && part.endsWith('**')) {
-        return <strong key={i} className="font-semibold text-slate-900">{part.slice(2, -2)}</strong>;
+        return <strong key={i} className="font-semibold">{part.slice(2, -2)}</strong>;
       }
       return part;
     });
@@ -74,7 +74,7 @@ function FormattedMessage({ text }) {
           return (
             <div key={idx} className="bg-amber-50/90 border border-amber-200/90 rounded-xl p-3 text-amber-900 shadow-xs my-2">
               <div className="flex items-center gap-1.5 font-bold text-amber-800 text-xs mb-1.5">
-                <FaExclamationTriangle className="text-amber-600 shrink-0 text-sm" />
+                <FaExclamationTriangle className="text-amber-800 shrink-0 text-sm" />
                 <span>{sec.title || 'Medical Disclaimer'}</span>
               </div>
               {sec.text && <p className="text-[11px] leading-relaxed text-amber-800/90 mb-2">{renderFormattedText(sec.text)}</p>}
@@ -94,18 +94,18 @@ function FormattedMessage({ text }) {
 
         if (sec.type === 'recommendation') {
           return (
-            <div key={idx} className="bg-emerald-50/70 border border-emerald-100/90 rounded-xl p-3 text-slate-800 my-1.5">
+            <div key={idx} className="bg-emerald-50/70 border border-emerald-100/90 rounded-xl p-3 text-emerald-900 my-1.5">
               <div className="flex items-center gap-1.5 font-bold text-emerald-800 text-xs mb-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
                 <span>{sec.title || 'Recommendations'}</span>
               </div>
-              {sec.text && <p className="text-xs leading-relaxed mb-2 text-slate-700">{renderFormattedText(sec.text)}</p>}
+              {sec.text && <p className="text-xs leading-relaxed mb-2 text-emerald-900">{renderFormattedText(sec.text)}</p>}
               {sec.items.length > 0 && (
                 <ul className="space-y-1.5 text-[11.5px]">
                   {sec.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1.5 shrink-0" />
-                      <span className="leading-relaxed text-slate-700">{renderFormattedText(item)}</span>
+                      <span className="leading-relaxed text-emerald-900">{renderFormattedText(item)}</span>
                     </li>
                   ))}
                 </ul>
@@ -186,7 +186,7 @@ function AIAssistant() {
 
   return (
     <div className="bg-white border border-slate-100 rounded-2xl shadow-sm p-6 flex flex-col h-full min-h-[480px]">
-      <div className="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-100 text-teal-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 self-start">
+      <div className="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-100 text-teal-800 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 self-start">
         <FaComments /> Conversational Agent v2.0
       </div>
       <h3 className="text-xl font-bold text-slate-900 mb-1">PlusCare AI Assistant</h3>
@@ -224,7 +224,7 @@ function AIAssistant() {
         {/* Input */}
         <form onSubmit={(e) => { e.preventDefault(); send(); }} className="flex border-t border-slate-100 bg-white p-2 gap-2">
           <input value={input} onChange={e => setInput(e.target.value)} placeholder="Type a health question..." className="flex-1 text-xs outline-none px-2 text-slate-700 bg-transparent" />
-          <button type="submit" disabled={!input.trim() || typing} className="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer">
+          <button type="submit" disabled={!input.trim() || typing} aria-label="Send message" className="w-8 h-8 rounded-full bg-blue-50 text-blue-800 flex items-center justify-center hover:bg-blue-600 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer">
             <FaPaperPlane className="text-xs" />
           </button>
         </form>
@@ -318,7 +318,7 @@ function SmartScheduler({ onAppointmentBooked }) {
 
   return (
     <div className="bg-white border border-slate-100 rounded-2xl shadow-sm p-6 flex flex-col h-full min-h-[480px]">
-      <div className="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-100 text-teal-600 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 self-start">
+      <div className="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-100 text-teal-800 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mb-4 self-start">
         <FaRegCalendarCheck /> Auto-Triage Scheduling
       </div>
       <h3 className="text-xl font-bold text-slate-900 mb-1">Smart Appointment Booking</h3>
@@ -329,7 +329,7 @@ function SmartScheduler({ onAppointmentBooked }) {
         {/* Step 1 */}
         {step === 1 && (
           <form onSubmit={analyze} className="flex flex-col gap-4 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl mx-auto shadow-sm">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-800 flex items-center justify-center text-xl mx-auto shadow-sm">
               <FaHeartbeat className="animate-pulse" />
             </div>
             <div>
@@ -374,7 +374,7 @@ function SmartScheduler({ onAppointmentBooked }) {
                   </div>
                 )}
                 {errorMsg && (
-                  <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-lg text-[11px]">
+                  <div className="bg-red-50 border border-red-200 text-red-800 px-3 py-2 rounded-lg text-[11px]">
                     {errorMsg}
                   </div>
                 )}
@@ -427,7 +427,7 @@ export default function AISection({ onAppointmentBooked }) {
     <section id="ai" className="py-24 bg-slate-50/50">
       <div className="max-w-7xl mx-auto px-5">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">AI Diagnostic Suite</span>
+          <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">AI Diagnostic Suite</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Intelligent Health Copilots</h2>
           <p className="text-slate-500 text-sm md:text-base leading-relaxed">Our AI modules clarify wellness queries and auto-route appointments to the right clinical team using live MongoDB data.</p>
         </div>

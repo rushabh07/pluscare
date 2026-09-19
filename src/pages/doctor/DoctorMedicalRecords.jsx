@@ -15,8 +15,12 @@ import {
     FiShield
 } from "react-icons/fi";
 import { medicalRecordService } from "../../services/api";
+import { useTheme } from "../../theme/ThemeContext";
 
-export default function DoctorMedicalRecords({ isDarkMode = true }) {
+export default function DoctorMedicalRecords({ isDarkMode: isDarkModeProp }) {
+    // Follow the global site theme unless a parent pins a specific mode
+    const { isDark } = useTheme();
+    const isDarkMode = isDarkModeProp ?? isDark;
     const [assignedPatients, setAssignedPatients] = useState([]);
     const [records, setRecords] = useState([]);
     const [selectedPatientId, setSelectedPatientId] = useState("ALL");
@@ -285,7 +289,7 @@ export default function DoctorMedicalRecords({ isDarkMode = true }) {
 
                 {/* Search Bar */}
                 <div className="relative w-full md:w-72">
-                    <FiSearch className="absolute left-3.5 top-3.5 text-gray-400" />
+                    <FiSearch className={`absolute left-3.5 top-3.5 ${isDarkMode ? "text-gray-400" : "text-slate-400"}`} />
                     <input
                         type="text"
                         placeholder="Search patient or diagnosis..."

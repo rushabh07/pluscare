@@ -22,16 +22,16 @@ export default function WhyChooseSection() {
 
         {/* Content */}
         <div>
-          <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">The PlusCare Standard</span>
+          <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">The PlusCare Standard</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-5">Why Leading Patients & Practitioners Choose PlusCare</h2>
           <p className="text-slate-500 text-sm leading-relaxed mb-8">We eliminate administrative delays so physicians spend fewer minutes at terminals and more time delivering face-to-face clinical excellence.</p>
 
           <div className="flex flex-col gap-6">
             {benefits.map((b, i) => (
               <div key={i} className="flex gap-4 group">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 shadow-sm">{b.icon}</div>
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-800 flex items-center justify-center shrink-0 group-hover:bg-teal-500 group-hover:text-white transition-all duration-300 shadow-sm">{b.icon}</div>
                 <div>
-                  <h4 className="text-base font-bold text-slate-900 mb-1">{b.title}</h4>
+                  <h3 className="text-base font-bold text-slate-900 mb-1">{b.title}</h3>
                   <p className="text-slate-500 text-xs leading-relaxed">{b.desc}</p>
                 </div>
               </div>

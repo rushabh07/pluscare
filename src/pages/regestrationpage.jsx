@@ -145,7 +145,7 @@ export default function Register() {
 
                     <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-5">
                         {errors.api && (
-                            <div className="md:col-span-2 p-3 bg-red-100 border border-red-400 text-red-700 rounded-xl text-sm">
+                            <div className="md:col-span-2 p-3 bg-red-100 border border-red-400 text-red-800 rounded-xl text-sm">
                                 {errors.api}
                             </div>
                         )}
@@ -154,11 +154,11 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Full Name
                             </label>
 
-                            <div className="flex items-center border rounded-xl px-4 py-3 mt-2">
+                            <div className="flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 mt-2 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                 <FiUser className="mr-3 text-slate-400" />
 
@@ -168,7 +168,7 @@ export default function Register() {
                                     placeholder="Full Name"
                                     value={formData.fullName}
                                     onChange={handleChange}
-                                    className="w-full outline-none"
+                                    className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                 />
 
                             </div>
@@ -179,11 +179,11 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Email
                             </label>
 
-                            <div className="flex items-center border rounded-xl px-4 py-3 mt-2">
+                            <div className="flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 mt-2 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                 <FiMail className="mr-3 text-slate-400" />
 
@@ -193,7 +193,7 @@ export default function Register() {
                                     placeholder="Email"
                                     value={formData.email}
                                     onChange={handleChange}
-                                    className="w-full outline-none"
+                                    className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                 />
 
                             </div>
@@ -204,11 +204,11 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Phone
                             </label>
 
-                            <div className="flex items-center border rounded-xl px-4 py-3 mt-2">
+                            <div className="flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 mt-2 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                 <FiPhone className="mr-3 text-slate-400" />
 
@@ -218,7 +218,7 @@ export default function Register() {
                                     placeholder="Phone Number"
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className="w-full outline-none"
+                                    className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                 />
 
                             </div>
@@ -229,7 +229,7 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Gender
                             </label>
 
@@ -237,7 +237,7 @@ export default function Register() {
                                 name="gender"
                                 value={formData.gender}
                                 onChange={handleChange}
-                                className="w-full border rounded-xl px-4 py-3 mt-2"
+                                className="w-full border border-slate-300 bg-white text-slate-900 rounded-xl px-4 py-3 mt-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                             >
                                 <option value="">Select Gender</option>
                                 <option>Male</option>
@@ -251,7 +251,7 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Date of Birth
                             </label>
 
@@ -260,7 +260,7 @@ export default function Register() {
                                 name="dob"
                                 value={formData.dob}
                                 onChange={handleChange}
-                                className="w-full border rounded-xl px-4 py-3 mt-2"
+                                className="w-full border border-slate-300 bg-white text-slate-900 rounded-xl px-4 py-3 mt-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                             />
 
                         </div>
@@ -269,7 +269,7 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Register As
                             </label>
 
@@ -277,7 +277,7 @@ export default function Register() {
                                 name="role"
                                 value={formData.role}
                                 onChange={handleChange}
-                                className="w-full border rounded-xl px-4 py-3 mt-2"
+                                className="w-full border border-slate-300 bg-white text-slate-900 rounded-xl px-4 py-3 mt-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                             >
                                 <option>Patient</option>
                                 <option>Doctor</option>
@@ -289,12 +289,12 @@ export default function Register() {
                         {formData.role === "Doctor" && (
                             <>
                                 <div>
-                                    <label className="font-semibold text-sm">Specialist</label>
+                                    <label className="font-semibold text-sm text-slate-900">Specialist</label>
                                     <select
                                         name="specialization"
                                         value={formData.specialization}
                                         onChange={handleChange}
-                                        className="w-full border rounded-xl px-4 py-3 mt-2"
+                                        className="w-full border border-slate-300 bg-white text-slate-900 rounded-xl px-4 py-3 mt-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                     >
                                         <option value="">Select Specialist</option>
                                         <option>Cardiologist</option>
@@ -312,12 +312,12 @@ export default function Register() {
                                 </div>
 
                                 <div>
-                                    <label className="font-semibold text-sm">Department</label>
+                                    <label className="font-semibold text-sm text-slate-900">Department</label>
                                     <select
                                         name="department"
                                         value={formData.department}
                                         onChange={handleChange}
-                                        className="w-full border rounded-xl px-4 py-3 mt-2"
+                                        className="w-full border border-slate-300 bg-white text-slate-900 rounded-xl px-4 py-3 mt-2 focus:border-blue-600 focus:ring-2 focus:ring-blue-100 outline-none transition-all"
                                     >
                                         <option value="">Select Department</option>
                                         <option>General Medicine</option>
@@ -336,11 +336,11 @@ export default function Register() {
 
                         <div className="md:col-span-2">
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Address
                             </label>
 
-                            <div className="flex items-center border rounded-xl px-4 py-3 mt-2">
+                            <div className="flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 mt-2 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                 <FiMapPin className="mr-3 text-slate-400" />
 
@@ -350,7 +350,7 @@ export default function Register() {
                                     value={formData.address}
                                     onChange={handleChange}
                                     placeholder="Address"
-                                    className="w-full outline-none"
+                                    className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                 />
 
                             </div>
@@ -361,11 +361,11 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Password
                             </label>
 
-                            <div className="flex items-center border rounded-xl px-4 py-3 mt-2">
+                            <div className="flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 mt-2 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                 <FiLock className="mr-3" />
 
@@ -375,7 +375,7 @@ export default function Register() {
                                     value={formData.password}
                                     onChange={handleChange}
                                     placeholder="Password"
-                                    className="w-full outline-none"
+                                    className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                 />
 
                                 <button
@@ -393,11 +393,11 @@ export default function Register() {
 
                         <div>
 
-                            <label className="font-semibold text-sm">
+                            <label className="font-semibold text-sm text-slate-900">
                                 Confirm Password
                             </label>
 
-                            <div className="flex items-center border rounded-xl px-4 py-3 mt-2">
+                            <div className="flex items-center border border-slate-300 bg-white rounded-xl px-4 py-3 mt-2 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
 
                                 <FiLock className="mr-3" />
 
@@ -407,7 +407,7 @@ export default function Register() {
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
                                     placeholder="Confirm Password"
-                                    className="w-full outline-none"
+                                    className="w-full outline-none bg-transparent text-slate-900 placeholder-slate-400"
                                 />
 
                                 <button

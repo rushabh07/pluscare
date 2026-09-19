@@ -11,6 +11,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Apply saved/system theme before first paint (avoids light flash) -->
+    <script>
+      (function () {
+        try {
+          var m = localStorage.getItem('pluscare-theme') || 'system';
+          var dark = m === 'system'
+            ? window.matchMedia('(prefers-color-scheme: dark)').matches
+            : m === 'dark';
+          if (dark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

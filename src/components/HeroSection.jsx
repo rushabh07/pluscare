@@ -12,7 +12,7 @@ export default function HeroSection({ onBook }) {
       <div className="max-w-7xl mx-auto px-5 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center flex-1 w-full py-12">
         {/* Left */}
         <div>
-          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/60 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-600 mb-6">
+          <div className="inline-flex items-center gap-2 bg-blue-50 border border-blue-200/60 px-3.5 py-1.5 rounded-full text-xs font-bold text-blue-800 mb-6">
             <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
             Next-Gen Healthcare SaaS Platform
           </div>
@@ -41,7 +41,7 @@ export default function HeroSection({ onBook }) {
             <div className="bg-white/80 backdrop-blur border border-white/60 rounded-2xl p-4 shadow-sm">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="text-xs font-bold text-slate-400">ECG / Heart Rate</span>
-                <span className="text-[10px] font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">Normal</span>
+                <span className="text-[10px] font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full">Normal</span>
               </div>
               <div className="text-2xl font-extrabold text-slate-900 mb-1">74 <span className="text-xs font-normal text-slate-400">BPM</span></div>
               <svg viewBox="0 0 100 20" className="w-full h-5">
@@ -51,7 +51,7 @@ export default function HeroSection({ onBook }) {
             <div className="bg-white/80 backdrop-blur border border-white/60 rounded-2xl p-4 shadow-sm">
               <div className="flex justify-between items-center mb-1.5">
                 <span className="text-xs font-bold text-slate-400">SpO₂ Oxygen</span>
-                <span className="text-[10px] font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded-full">Optimal</span>
+                <span className="text-[10px] font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded-full">Optimal</span>
               </div>
               <div className="text-2xl font-extrabold text-slate-900 mb-2">99<span className="text-xs font-normal text-slate-400">%</span></div>
               <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
@@ -81,7 +81,7 @@ export default function HeroSection({ onBook }) {
                   <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=80" alt="patient" className="w-9 h-9 rounded-full object-cover border-2 border-blue-500" />
                   <div><p className="text-xs font-bold text-slate-800">Sophia Lindqvist</p><p className="text-[10px] text-slate-400">ID: PC-89021</p></div>
                 </div>
-                <span className="text-[10px] font-bold text-teal-600 bg-teal-50 px-2.5 py-1 rounded-full">● Live</span>
+                <span className="text-[10px] font-bold text-teal-800 bg-teal-50 px-2.5 py-1 rounded-full">● Live</span>
               </div>
 
               {/* Video */}
@@ -101,8 +101,8 @@ export default function HeroSection({ onBook }) {
 
               {/* AI Sync */}
               <div className="bg-blue-50/60 border border-blue-100 rounded-xl p-3">
-                <div className="flex items-center gap-1.5 text-[10px] font-bold text-blue-600 uppercase mb-1"><FaBrain className="text-xs" /> AI Co-Pilot Sync</div>
-                <p className="text-[11px] text-slate-500 italic leading-relaxed">"Cardiac baseline 74 BPM — vitals stable. Telemetry streaming to patient file..."</p>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-blue-800 uppercase mb-1"><FaBrain className="text-xs" /> AI Co-Pilot Sync</div>
+                <p className="text-[11px] text-blue-900 italic leading-relaxed">"Cardiac baseline 74 BPM — vitals stable. Telemetry streaming to patient file..."</p>
               </div>
             </div>
           </div>

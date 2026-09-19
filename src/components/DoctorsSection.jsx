@@ -30,7 +30,7 @@ export default function DoctorsSection({ onBook }) {
     <section id="doctors" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-5">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-block text-xs font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Our Clinicians</span>
+          <span className="inline-block text-xs font-bold text-blue-800 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">Our Clinicians</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Board-Certified Specialists</h2>
           <p className="text-slate-500 text-sm md:text-base leading-relaxed">Meet our verified medical doctors, providing expert and compassionate healthcare.</p>
         </div>
@@ -42,7 +42,7 @@ export default function DoctorsSection({ onBook }) {
           </div>
         ) : error ? (
           <div className="max-w-md mx-auto p-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl text-center flex flex-col items-center gap-2">
-            <FiAlertCircle className="text-2xl text-rose-600" />
+            <FiAlertCircle className="text-2xl text-rose-800" />
             <p className="text-sm font-semibold">{error}</p>
             <button onClick={fetchDoctors} className="text-xs bg-rose-600 text-white font-bold px-3 py-1.5 rounded-lg hover:bg-rose-700 transition-colors mt-1">
               Retry

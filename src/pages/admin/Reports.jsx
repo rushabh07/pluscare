@@ -58,64 +58,64 @@ export default function Reports() {
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white">Reports</h1>
-          <p className="text-gray-500 text-sm mt-1">Hospital performance overview</p>
+          <h1 className="text-2xl font-extrabold text-slate-900">Reports</h1>
+          <p className="text-slate-500 text-sm mt-1">Hospital performance overview</p>
         </div>
       </div>
 
       {/* Date Filter */}
-      <div className="flex flex-wrap gap-3 bg-gray-900 border border-gray-800 rounded-2xl p-4">
+      <div className="flex flex-wrap gap-3 bg-white border border-slate-200 rounded-2xl p-4">
         <div className="flex items-center gap-2">
-          <FiCalendar className="text-gray-500 text-sm" />
-          <span className="text-gray-500 text-sm">Filter by date:</span>
+          <FiCalendar className="text-slate-500 text-sm" />
+          <span className="text-slate-500 text-sm">Filter by date:</span>
         </div>
         <input type="date" value={dateRange.from} onChange={(e) => setDateRange({ ...dateRange, from: e.target.value })}
-          className="bg-gray-800 border border-gray-700 rounded-xl px-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500" />
-        <span className="text-gray-600 text-sm self-center">to</span>
+          className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500" />
+        <span className="text-slate-500 text-sm self-center">to</span>
         <input type="date" value={dateRange.to} onChange={(e) => setDateRange({ ...dateRange, to: e.target.value })}
-          className="bg-gray-800 border border-gray-700 rounded-xl px-3 py-1.5 text-sm text-white focus:outline-none focus:border-blue-500" />
+          className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-sm text-slate-900 focus:outline-none focus:border-blue-500" />
         {(dateRange.from || dateRange.to) && (
-          <button onClick={() => setDateRange({ from: "", to: "" })} className="text-xs text-gray-500 hover:text-white transition-colors">Clear</button>
+          <button onClick={() => setDateRange({ from: "", to: "" })} className="text-xs text-slate-500 hover:text-slate-700 transition-colors">Clear</button>
         )}
       </div>
 
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[...Array(4)].map((_, i) => <div key={i} className="h-28 bg-gray-900 border border-gray-800 rounded-2xl animate-pulse" />)}
+          {[...Array(4)].map((_, i) => <div key={i} className="h-28 bg-white border border-slate-200 rounded-2xl animate-pulse" />)}
         </div>
       ) : (
         <>
           {/* Summary Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { icon: <FiCalendar />, label: "Appointments", value: filteredAppts.length, color: "text-blue-400 bg-blue-500/20" },
-              { icon: <FiUsers />,    label: "Doctors",      value: doctors,              color: "text-purple-400 bg-purple-500/20" },
-              { icon: <FiUsers />,    label: "Patients",     value: patients,             color: "text-cyan-400 bg-cyan-500/20" },
-              { icon: <FiDollarSign />, label: "Revenue Collected", value: `₹${totalRevenue.toLocaleString()}`, color: "text-emerald-400 bg-emerald-500/20" },
+              { icon: <FiCalendar />, label: "Appointments", value: filteredAppts.length, color: "text-blue-800 bg-blue-100" },
+              { icon: <FiUsers />,    label: "Doctors",      value: doctors,              color: "text-purple-800 bg-purple-100" },
+              { icon: <FiUsers />,    label: "Patients",     value: patients,             color: "text-cyan-800 bg-cyan-100" },
+              { icon: <FiDollarSign />, label: "Revenue Collected", value: `₹${totalRevenue.toLocaleString()}`, color: "text-emerald-800 bg-emerald-100" },
             ].map((c, i) => (
-              <div key={i} className="bg-gray-900 border border-gray-800 rounded-2xl p-5 flex items-start gap-4">
+              <div key={i} className="bg-white border border-slate-200 rounded-2xl p-5 flex items-start gap-4">
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${c.color} flex-shrink-0`}>{c.icon}</div>
                 <div>
-                  <p className="text-gray-500 text-sm">{c.label}</p>
-                  <p className="text-xl font-bold text-white mt-0.5">{c.value}</p>
+                  <p className="text-slate-500 text-sm">{c.label}</p>
+                  <p className="text-xl font-bold text-slate-900 mt-0.5">{c.value}</p>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Appointment Status Breakdown */}
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5">
-            <h2 className="text-base font-semibold text-white mb-5">Appointment Status Breakdown</h2>
+          <div className="bg-white border border-slate-200 rounded-2xl p-5">
+            <h2 className="text-base font-bold text-slate-900 mb-5">Appointment Status Breakdown</h2>
             <div className="space-y-3">
               {apptByStatus.map((item) => {
                 const pct = filteredAppts.length > 0 ? Math.round((item.count / filteredAppts.length) * 100) : 0;
                 return (
                   <div key={item.status}>
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm text-gray-400">{item.status}</span>
-                      <span className="text-sm text-white font-medium">{item.count} ({pct}%)</span>
+                      <span className="text-sm text-slate-600">{item.status}</span>
+                      <span className="text-sm text-slate-900 font-medium">{item.count} ({pct}%)</span>
                     </div>
-                    <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${STATUS_COLORS[item.status]}`}
                         style={{ width: `${pct}%` }}
@@ -128,18 +128,18 @@ export default function Reports() {
           </div>
 
           {/* Billing Summary */}
-          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5">
-            <h2 className="text-base font-semibold text-white mb-4">Billing Summary</h2>
+          <div className="bg-white border border-slate-200 rounded-2xl p-5">
+            <h2 className="text-base font-bold text-slate-900 mb-4">Billing Summary</h2>
             <div className="grid grid-cols-3 gap-4">
               {["Paid", "Pending", "Overdue"].map((s) => {
                 const items = filteredBills.filter((b) => b.status === s);
                 const total = items.reduce((sum, b) => sum + (b.amount || 0), 0);
-                const color = s === "Paid" ? "text-emerald-400" : s === "Pending" ? "text-yellow-400" : "text-red-400";
+                const color = s === "Paid" ? "text-emerald-700" : s === "Pending" ? "text-amber-700" : "text-red-600";
                 return (
-                  <div key={s} className="bg-gray-800/50 rounded-xl p-4 text-center">
-                    <p className="text-gray-500 text-xs mb-1">{s}</p>
+                  <div key={s} className="bg-slate-100 rounded-xl p-4 text-center">
+                    <p className="text-slate-500 text-xs mb-1">{s}</p>
                     <p className={`text-lg font-bold ${color}`}>₹{total.toLocaleString()}</p>
-                    <p className="text-gray-600 text-xs mt-0.5">{items.length} bill{items.length !== 1 ? "s" : ""}</p>
+                    <p className="text-slate-500 text-xs mt-0.5">{items.length} bill{items.length !== 1 ? "s" : ""}</p>
                   </div>
                 );
               })}

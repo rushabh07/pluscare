@@ -134,14 +134,14 @@ export default function ForgotPassword() {
                 </div>
 
                 {success && (
-                    <div className="mb-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl p-3 text-sm flex items-center gap-2">
+                    <div className="mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-3 text-sm flex items-center gap-2">
                         <FiCheckCircle className="shrink-0 text-emerald-600" />
                         <span>{success}</span>
                     </div>
                 )}
 
                 {error && (
-                    <div className="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-xl p-3 text-sm">
+                    <div className="mb-4 bg-red-50 border border-red-200 text-red-800 rounded-xl p-3 text-sm">
                         {error}
                     </div>
                 )}
